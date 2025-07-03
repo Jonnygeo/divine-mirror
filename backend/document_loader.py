@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import json
 
-from langchain.document_loaders import (
+from langchain_community.document_loaders import (
     TextLoader,
     DirectoryLoader,
     PyPDFLoader,

@@ -1,8 +1,8 @@
 import os
 import logging
 from typing import Dict, List, Optional, Any
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain.schema import Document
 
 # Set up logging
@@ -32,8 +32,7 @@ class EmbeddingStore:
         
         # Initialize the embedding function
         self.embedding_model = OpenAIEmbeddings(
-            model=embedding_model_name,
-            openai_api_key=os.getenv("OPENAI_API_KEY")
+            model=embedding_model_name
         )
         
         # Initialize ChromaDB
