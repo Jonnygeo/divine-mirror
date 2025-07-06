@@ -209,6 +209,28 @@ async def get_system_status(background_tasks: BackgroundTasks):
         "chroma_db_path": CHROMA_DB_PATH
     }
 
+@app.get("/test_smart_model")
+async def test_smart_model():
+    """Test the smart model switcher"""
+    from backend.smart_response import smart_generate
+    
+    test_prompt = "Explain the Kingdom of God as a spiritual state according to Jesus's original teachings."
+    
+    try:
+        response = smart_generate(test_prompt, max_tokens=300)
+        return {
+            "status": "success",
+            "prompt": test_prompt,
+            "response": response,
+            "model": "Smart Model Switcher (OpenAI with DeepSeek fallback)"
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "prompt": test_prompt
+        }
+
 def start():
     """Run the API server with Uvicorn"""
     uvicorn.run("backend.api:app", host="0.0.0.0", port=8000, reload=True)

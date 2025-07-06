@@ -1,0 +1,61 @@
+
+README: DeepSeek-R1 Integration for DivineMirrorAI
+===================================================
+
+This package updates the DivineMirrorAI app to use the DeepSeek-R1 language model for all text generation and reasoning tasks.
+
+CONTENTS:
+---------
+1. backend/llm_chain.py         <- Loads and runs DeepSeek-R1 locally
+2. INSTALLATION_INSTRUCTIONS.txt <- Step-by-step guide for setup on Replit
+
+INSTRUCTIONS FOR REPLIT AGENT:
+==============================
+
+STEP 1: Replace the existing llm_chain.py file
+----------------------------------------------
+- Move 'llm_chain.py' from this zip to:
+  DivineMirrorAI/backend/llm_chain.py
+- Overwrite if prompted.
+
+STEP 2: Install required Python packages
+----------------------------------------
+In the Replit shell or via poetry, run:
+
+    poetry add transformers torch accelerate
+
+Or, if using pip:
+
+    pip install transformers torch accelerate
+
+STEP 3: Ensure the app is calling the new function
+--------------------------------------------------
+Anywhere in the app you generate responses, replace previous model calls with:
+
+    from backend.llm_chain import generate_response
+    output = generate_response("Your prompt here")
+
+STEP 4: (Optional Test Route)
+-----------------------------
+In backend/api.py, add this for a quick test:
+
+    @app.route("/test_deepseek")
+    def test_deepseek():
+        from backend.llm_chain import generate_response
+        return generate_response("Explain the Kingdom of God as a spiritual state.")
+
+Then navigate to:
+    http://localhost:5000/test_deepseek
+
+You should receive a DeepSeek-R1-generated explanation.
+
+STEP 5: Troubleshooting
+-----------------------
+- If CUDA is unavailable (e.g., on free Replit tier), model runs on CPU.
+- For low-RAM systems, ask for a quantized version of DeepSeek-R1.
+
+QUESTIONS?
+----------
+Contact your developer or system lead to request a smaller version or cloud-hosted model endpoint.
+
+You're now running your own legacy-grade AI brain, free from API costs.
