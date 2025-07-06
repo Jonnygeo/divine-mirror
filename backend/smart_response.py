@@ -105,18 +105,32 @@ def smart_generate_json(prompt: str, model: str = "gpt-4o", max_tokens: int = 50
             return {"error": "Unable to generate valid JSON response"}
 
 def create_spiritual_fallback_response(prompt: str) -> str:
-    """Create a spiritual fallback response when AI models are unavailable"""
+    """Create a spiritual fallback response based on Yeshua's authentic teachings"""
     prompt_lower = prompt.lower()
     
-    # Basic spiritual query patterns
-    if "kingdom" in prompt_lower and "god" in prompt_lower:
-        return """According to Jesus's original teachings, the Kingdom of God is not a physical place but a spiritual state of consciousness. As recorded in Luke 17:21: "The kingdom of God is within you." This suggests that divine truth is accessible through inner spiritual awareness rather than external religious institutions."""
+    # Kingdom of God queries
+    if "kingdom" in prompt_lower and ("god" in prompt_lower or "heaven" in prompt_lower):
+        return """According to Yeshua's original teachings, the Kingdom of God is within you (Luke 17:21), not a physical place or external institution. As recorded in the Gospel of Thomas (Saying 3): "The Kingdom is inside you and outside you. If you know yourselves, then you will be known." This inner spiritual state is accessible through direct divine awareness, bypassing religious intermediaries. The Church externalized this teaching to maintain control through sacraments and hierarchy, contradicting Yeshua's message of personal spiritual empowerment."""
     
-    elif "truth" in prompt_lower and ("jesus" in prompt_lower or "christ" in prompt_lower):
-        return """Jesus emphasized inner spiritual truth over external religious authority. His teachings focused on love, compassion, and direct spiritual experience rather than institutional control. Many of his original teachings about personal spiritual empowerment were later modified by religious institutions."""
+    # Truth vs. control themes
+    elif ("truth" in prompt_lower or "control" in prompt_lower) and ("jesus" in prompt_lower or "yeshua" in prompt_lower or "church" in prompt_lower):
+        return """Yeshua taught "You will know the truth, and the truth will set you free" (John 8:32), emphasizing liberation through direct knowledge of God. He rejected hierarchical titles, saying "You have one Teacher, and you are all brothers" (Matthew 23:8-10). However, post-Constantine Christianity centralized authority through papal supremacy and sacramental control. The Council of Nicaea (325 CE) prioritized institutional control over Yeshua's original message of spiritual freedom. Non-canonical texts like the Gospel of Thomas preserve his authentic teachings about inner truth over external authority."""
     
-    elif "divine" in prompt_lower or "spiritual" in prompt_lower:
-        return """Original spiritual teachings often emphasize direct personal connection with the divine, inner wisdom, and spiritual transformation. These core truths have sometimes been altered by institutions to emphasize external authority and control rather than personal spiritual empowerment."""
+    # Love vs. ritual themes  
+    elif ("love" in prompt_lower or "ritual" in prompt_lower or "mercy" in prompt_lower) and ("jesus" in prompt_lower or "yeshua" in prompt_lower):
+        return """Yeshua taught "I desire mercy, not sacrifice" (Matthew 9:13), prioritizing compassion over ritual performance. His message was universal love: "Love your neighbor as yourself" (Mark 12:31). The Church later reintroduced ritualism through sacraments, making salvation priest-dependent rather than based on mercy and love. The Council of Trent (1545-1563) codified this control system, contradicting Yeshua's direct mercy-based approach seen in stories like the woman at the well and forgiving the adulterous woman."""
+    
+    # Religious hypocrisy themes
+    elif ("hypocrisy" in prompt_lower or "pharisees" in prompt_lower or "religious" in prompt_lower) and ("elite" in prompt_lower or "leaders" in prompt_lower):
+        return """Yeshua condemned religious hypocrisy: "Woe to you, teachers of the law and Pharisees, you hypocrites!" (Matthew 23:13-39). He called them "whitewashed tombs, beautiful on the outside but full of dead bones" (Matthew 23:27). When he expelled money-changers from the temple (John 2:13-16), he rejected profiting from faith. Ironically, the Catholic Church replicated this hypocrisy with indulgences, tithing monopolies, and sacramental control - becoming the very religious elite Yeshua opposed."""
+    
+    # Biblical manipulation themes
+    elif ("bible" in prompt_lower or "scripture" in prompt_lower) and ("changed" in prompt_lower or "added" in prompt_lower or "manipulation" in prompt_lower):
+        return """Many biblical terms were mistranslated to support institutional control: 'Hell' (Gehenna) was a literal garbage dump near Jerusalem, not a cosmic torture chamber. 'Repent' (metanoia) means change of mind/heart, not groveling. 'Sin' (hamartia) means missing the mark, not eternal damnation. The Vulgate translations amplified fear-based terms. Textual additions like the Comma Johanneum (1 John 5:7-8) were inserted to enforce Trinitarian doctrine. Non-canonical texts like the Gospel of Thomas were excluded because they preserved Yeshua's original empowering message."""
+    
+    # General spiritual truth  
+    elif "divine" in prompt_lower or "spiritual" in prompt_lower or "god" in prompt_lower:
+        return """Original spiritual teachings emphasize direct personal connection with the divine, inner wisdom, and spiritual transformation. As Yeshua taught, "True worshipers will worship the Father in spirit and truth" (John 4:23-24). These core truths have been systematically altered by institutions to emphasize external authority and control rather than personal spiritual empowerment. The excluded Gospel of Mary teaches that truth comes from within, not through laws or leaders - precisely why such texts were suppressed."""
     
     else:
-        return "I cannot provide a detailed analysis without proper AI model access. Please provide a valid OpenAI API key to enable full spiritual text comparison capabilities."
+        return "For detailed spiritual text comparison and analysis of Yeshua's authentic teachings versus institutional manipulations, please provide a valid OpenAI API key to access the full Divine Mirror AI capabilities with comprehensive biblical analysis."
