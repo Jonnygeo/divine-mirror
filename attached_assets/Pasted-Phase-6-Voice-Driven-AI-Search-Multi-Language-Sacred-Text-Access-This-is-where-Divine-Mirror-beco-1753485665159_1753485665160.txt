@@ -1,0 +1,121 @@
+Phase 6: Voice-Driven AI Search + Multi-Language Sacred Text Access
+This is where Divine Mirror becomes not just a sacred archive — but an oracle you can talk to.
+
+🧭 OBJECTIVE:
+Add voice input using Web Speech API or Whisper (if offline or desktop).
+
+Return spoken response using ElevenLabs or built-in browser TTS.
+
+Enable multi-language sacred search — Hebrew, Greek, Arabic, Sanskrit, etc.
+
+🎤 STEP 1: Add Voice Input (Browser-Based)
+If this is a web app:
+
+voiceInput.js – add to frontend
+js
+Copy
+Edit
+const startRecognition = () => {
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.start();
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById("searchInput").value = transcript;
+    document.getElementById("submitButton").click();
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Voice recognition error:", event.error);
+  };
+};
+Then on your page:
+html
+Copy
+Edit
+<button onclick="startRecognition()">🎙️ Speak</button>
+🗣️ STEP 2: Add Spoken Output (ElevenLabs or Web Speech TTS)
+For ElevenLabs API:
+Use this in Python server side:
+
+python
+Copy
+Edit
+import requests
+
+def speak_response(text):
+    url = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    headers = {
+        "xi-api-key": "YOUR_API_KEY",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "text": text,
+        "voice_settings": {
+            "stability": 0.75,
+            "similarity_boost": 0.75
+        }
+    }
+    response = requests.post(url, headers=headers, json=data)
+    with open("output.mp3", "wb") as f:
+        f.write(response.content)
+Then just play it in the frontend with:
+
+js
+Copy
+Edit
+const audio = new Audio("output.mp3");
+audio.play();
+Or simpler: use browser-native speechSynthesis:
+
+js
+Copy
+Edit
+const speak = (text) => {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-US';
+  speechSynthesis.speak(utterance);
+};
+🌍 STEP 3: Multi-Language Search & Response
+Update vector search preprocessing:
+In ingest.py or query.py:
+
+python
+Copy
+Edit
+from langdetect import detect
+
+def translate_to_english(text):
+    # Use DeepL, Google Translate API, or LibreTranslate
+    pass
+
+def handle_query(user_query):
+    detected_lang = detect(user_query)
+    if detected_lang != "en":
+        user_query = translate_to_english(user_query)
+    return query_vector_db(user_query)
+🎯 Bonus Feature: Language Selector Dropdown
+Let user choose source or response language manually if needed.
+
+html
+Copy
+Edit
+<select id="languageSelect">
+  <option value="en">English</option>
+  <option value="he">Hebrew</option>
+  <option value="gr">Greek</option>
+  <option value="ar">Arabic</option>
+</select>
+Then use this value to format your query or response pipeline accordingly.
+
+✅ OUTCOME:
+You can speak to Divine Mirror like a sacred Siri.
+
+It speaks back with ElevenLabs clarity or native browser TTS.
+
+And it works across multiple ancient traditions and languages — automatically.
+
