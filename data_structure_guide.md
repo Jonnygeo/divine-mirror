@@ -106,22 +106,90 @@ data/texts/
 │       ├── Commentary/ (Modern Taoist thought)
 │       └── Comparative/ (Taoism and modern science)
 │
-└── Zoroastrianism/
+├── Zoroastrianism/
+│   ├── Ancient/
+│   │   ├── Original/ (Avesta, Gathas)
+│   │   ├── Translations/ (Pahlavi texts)
+│   │   ├── Commentary/ (Zoroastrian theology)
+│   │   └── Comparative/ (Persian religion evolution)
+│   ├── Medieval/
+│   │   ├── Original/ (Middle Persian literature)
+│   │   ├── Translations/ (Islamic period texts)
+│   │   ├── Commentary/ (Zoroastrian survival)
+│   │   └── Comparative/ (Zoroastrian-Islamic interaction)
+│   └── Modern/
+│       ├── Original/ (Parsi community texts)
+│       ├── Translations/ (Modern scholarship)
+│       ├── Commentary/ (Contemporary Zoroastrianism)
+│       └── Comparative/ (Zoroastrian influence studies)
+│
+├── Bahai/
+│   ├── Ancient/
+│   │   ├── Original/ (Bab's writings, early Bahai texts)
+│   │   ├── Translations/ (Persian to Arabic translations)
+│   │   ├── Commentary/ (Early Bahai theology)
+│   │   └── Comparative/ (Islamic-Bahai connections)
+│   ├── Medieval/
+│   │   ├── Original/ (Baha'u'llah's major works)
+│   │   ├── Translations/ (Kitab-i-Aqdas translations)
+│   │   ├── Commentary/ (Abdul-Baha's interpretations)
+│   │   └── Comparative/ (World religion synthesis)
+│   └── Modern/
+│       ├── Original/ (Universal House of Justice letters)
+│       ├── Translations/ (Global language versions)
+│       ├── Commentary/ (Contemporary Bahai scholarship)
+│       └── Comparative/ (Interfaith dialogue contributions)
+│
+├── Shinto/
+│   ├── Ancient/
+│   │   ├── Original/ (Kojiki, Nihon Shoki)
+│   │   ├── Translations/ (Classical Japanese texts)
+│   │   ├── Commentary/ (Ancient kami worship)
+│   │   └── Comparative/ (Pre-Buddhist Japanese religion)
+│   ├── Medieval/
+│   │   ├── Original/ (Shrine chronicles, ritual texts)
+│   │   ├── Translations/ (Buddhist-Shinto synthesis)
+│   │   ├── Commentary/ (Medieval syncretism)
+│   │   └── Comparative/ (Shinto-Buddhist interaction)
+│   └── Modern/
+│       ├── Original/ (State Shinto documents)
+│       ├── Translations/ (Modern interpretations)
+│       ├── Commentary/ (Contemporary Shinto practice)
+│       └── Comparative/ (Shinto nationalism analysis)
+│
+├── Indigenous/
+│   ├── Ancient/
+│   │   ├── Original/ (Oral traditions transcribed)
+│   │   ├── Translations/ (Tribal language preservation)
+│   │   ├── Commentary/ (Anthropological studies)
+│   │   └── Comparative/ (Global indigenous wisdom)
+│   ├── Medieval/
+│   │   ├── Original/ (Post-contact adaptations)
+│   │   ├── Translations/ (Colonial period records)
+│   │   ├── Commentary/ (Cultural survival strategies)
+│   │   └── Comparative/ (Indigenous-Christian syncretism)
+│   └── Modern/
+│       ├── Original/ (Contemporary indigenous voices)
+│       ├── Translations/ (Revitalization movements)
+│       ├── Commentary/ (Decolonization theology)
+│       └── Comparative/ (Indigenous rights and spirituality)
+│
+└── Other/
     ├── Ancient/
-    │   ├── Original/ (Avesta, Gathas)
-    │   ├── Translations/ (Pahlavi texts)
-    │   ├── Commentary/ (Zoroastrian theology)
-    │   └── Comparative/ (Persian religion evolution)
+    │   ├── Original/ (Mystery schools, ancient wisdom)
+    │   ├── Translations/ (Hermetic, Gnostic texts)
+    │   ├── Commentary/ (Esoteric traditions)
+    │   └── Comparative/ (Cross-cultural mysticism)
     ├── Medieval/
-    │   ├── Original/ (Middle Persian literature)
-    │   ├── Translations/ (Islamic period texts)
-    │   ├── Commentary/ (Zoroastrian survival)
-    │   └── Comparative/ (Zoroastrian-Islamic interaction)
+    │   ├── Original/ (Alchemy, mystical texts)
+    │   ├── Translations/ (Western esoteric tradition)
+    │   ├── Commentary/ (Medieval occultism)
+    │   └── Comparative/ (East-West mystical exchange)
     └── Modern/
-        ├── Original/ (Parsi community texts)
-        ├── Translations/ (Modern scholarship)
-        ├── Commentary/ (Contemporary Zoroastrianism)
-        └── Comparative/ (Zoroastrian influence studies)
+        ├── Original/ (New religious movements)
+        ├── Translations/ (Contemporary spirituality)
+        ├── Commentary/ (Modern mysticism)
+        └── Comparative/ (Syncretic spiritual movements)
 ```
 
 ## 🎯 **Population Strategy**

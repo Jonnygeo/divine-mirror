@@ -41,10 +41,11 @@ class SacredTextIngester:
             'Sikhism': ['sikh', 'guru', 'granth', 'sahib', 'punjabi', 'khalsa'],
             'Jainism': ['jain', 'mahavira', 'ahimsa', 'non-violence', 'jina'],
             'Zoroastrianism': ['zoroaster', 'avesta', 'ahura', 'mazda', 'persian', 'parsi'],
+            'Bahai': ['bahai', "baha'i", 'bahaullah', 'abdul-baha', 'kitab', 'aqdas', 'bab'],
             'Shinto': ['shinto', 'kami', 'kojiki', 'nihon', 'japanese', 'shrine'],
-            'Indigenous': ['native', 'indigenous', 'tribal', 'shamanic', 'oral tradition'],
+            'Indigenous': ['native', 'indigenous', 'tribal', 'shamanic', 'oral tradition', 'aboriginal'],
             'Gnosticism': ['gnostic', 'nag hammadi', 'sophia', 'demiurge', 'pistis'],
-            'Hermeticism': ['hermetic', 'hermes', 'trismegistus', 'emerald', 'alchemy']
+            'Other': ['hermetic', 'hermes', 'trismegistus', 'emerald', 'alchemy', 'esoteric', 'occult', 'mystery']
         }
         
         # Period keywords for auto-classification

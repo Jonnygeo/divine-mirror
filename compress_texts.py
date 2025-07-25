@@ -74,7 +74,7 @@ def verify_structure():
     expected_traditions = [
         "Christianity", "Judaism", "Islam", "Hinduism", "Buddhism", 
         "Taoism", "Zoroastrianism", "Jainism", "Sikhism", "Confucianism", 
-        "Shinto", "Indigenous", "Gnosticism", "Hermeticism"
+        "Bahai", "Shinto", "Indigenous", "Gnosticism", "Other"
     ]
     
     expected_periods = ["Ancient", "Medieval", "Modern"]
