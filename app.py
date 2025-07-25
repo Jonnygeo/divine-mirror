@@ -4,6 +4,7 @@ import httpx
 import asyncio
 import json
 from typing import List, Optional, Dict, Any
+from divine_emotional_engine import EmotionalToneEngine
 
 # Configure page with modern settings
 st.set_page_config(
