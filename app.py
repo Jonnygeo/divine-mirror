@@ -594,9 +594,29 @@ def main():
             
             st.markdown('</div>', unsafe_allow_html=True)
     
+    # Legal Disclaimer Footer
+    st.markdown("---")
+    st.markdown("""
+    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; margin: 2rem 0; color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+        <div style="color: #f97316; font-weight: 600; margin-bottom: 1rem;">⚠️ Disclaimer</div>
+        <p>This is an experimental tool provided for personal, educational, and exploratory use only. All features are 100% free. No financial value, utility, or guarantees are implied or provided.</p>
+        
+        <div style="margin: 1rem 0; font-size: 0.85rem;">
+            <a href="#" style="color: #667eea; text-decoration: none;">View Full Disclaimer</a> | 
+            <a href="#" style="color: #667eea; text-decoration: none;">GitHub Legal Notice</a>
+        </div>
+        
+        <p style="margin-bottom: 0.5rem;">This project is experimental and created for entertainment and exploratory purposes only. It does not offer financial utility, investment promises, or future returns of any kind.</p>
+        
+        <p style="margin-bottom: 0.5rem;">The associated token (if launched) has no inherent value and is not intended for speculation, profit, or investment. It is not a security, utility token, or financial instrument.</p>
+        
+        <p style="margin-bottom: 0;">By interacting with this app or token, you acknowledge that it is for fun, curiosity, and community exploration — not for financial gain.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     # Footer
     st.markdown("""
-    <div style="text-align: center; margin-top: 3rem; padding: 2rem; color: #64748b;">
+    <div style="text-align: center; margin-top: 2rem; padding: 1rem; color: #64748b;">
         <p>Divine Mirror AI - Revealing truth through ancient wisdom</p>
         <p style="font-size: 0.9rem;">The Kingdom of God is within you</p>
     </div>
