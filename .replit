@@ -24,6 +24,10 @@ args = "Streamlit App"
 task = "workflow.run"
 args = "Backend API"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Voice App"
+
 [[workflows.workflow]]
 name = "Streamlit App"
 author = "agent"
@@ -42,9 +46,22 @@ task = "shell.exec"
 args = "python -m backend.api"
 waitForPort = 8000
 
+[[workflows.workflow]]
+name = "Voice App"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "streamlit run voice_app.py --server.port 5001"
+waitForPort = 5001
+
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3000
 
 [[ports]]
 localPort = 8000
