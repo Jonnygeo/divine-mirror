@@ -1,10 +1,10 @@
 # Divine Mirror AI - Project Documentation
 
 ## Overview
-Divine Mirror AI is a spiritual truth comparison application that reveals how original religious teachings have evolved or been altered throughout history. Built with FastAPI backend, Streamlit frontend, OpenAI GPT-4o, and ChromaDB for semantic search across sacred texts.
+Divine Mirror AI is a semantic search and spiritual comparison engine using vectorized sacred texts. Users can ask deep, spiritually-driven questions like "What did Yeshua actually teach about forgiveness?" or "How does the Tao compare to the Gospels on peace?" The system uses a vector database built from 131 sacred texts including multiple Bible versions, Quran, Tao Te Ching, Vedas, Dead Sea Scrolls, Apocrypha, Nag Hammadi, and original-language texts (Greek, Hebrew, Sanskrit).
 
 ## Purpose
-Expose the divergence between spiritual originators and modern institutions by comparing authentic ancient texts with modern interpretations, revealing propaganda, fear-based doctrine, and manipulation tactics.
+Truth-seeking educational tool for spiritual curiosity and ethical AI usage. Exposes divergence between spiritual originators and modern institutions by comparing authentic ancient texts with modern interpretations, revealing propaganda, fear-based doctrine, and manipulation tactics. Not for monetization, not for financial use, makes no theological claims of authority.
 
 ## Technology Stack
 - **Backend**: FastAPI with OpenAI GPT-4o integration
@@ -26,7 +26,11 @@ Expose the divergence between spiritual originators and modern institutions by c
 3. **Timeline Evolution**: Track how teachings changed across historical periods
 
 ### Text Organization:
-- Directory structure: `[Tradition]/[TimePeriod]/[Type]/filename.txt`
+- Structured directory: `data/texts/[Tradition]/[Period]/[Type]/`
+  - `Original/` - Source language texts (Greek, Hebrew, Sanskrit, Arabic)
+  - `Translations/` - Standard and literal versions 
+  - `Commentary/` - Scholarly reflections
+  - `Comparative/` - Inter-tradition references
 - Metadata extraction from file paths for intelligent filtering
 - Support for .txt, .pdf, and .json formats
 
@@ -44,6 +48,7 @@ Expose the divergence between spiritual originators and modern institutions by c
 - **Jan 2025**: Created comprehensive Bible Dissection Project framework with systematic methodology for exposing manipulations
 - **Jan 2025**: Developed video script templates for YouTube series with hook formulas, evidence presentation, and truth revelation structures
 - **Jan 2025**: Fixed empty response issue - enhanced fallback system now properly triggers when AI models return empty content
+- **Jan 2025**: Fixed source citations visibility - all citation text now displays in white for better readability against dark interface
 - **Jan 2025**: MAJOR UPGRADE: Integrated complete sacred text library (115 documents, 252 semantic chunks) including original language texts, multiple translations, non-canonical works, and multi-religious scriptures
 - **Jan 2025**: FINAL ENHANCEMENT: Added authentic sacred texts via automated downloader (131 total documents) including complete KJV Bible, Young's Literal Translation, Book of Enoch, Tao Te Ching, Quran translations, Dhammapada, and Avesta from Project Gutenberg and Sacred-texts.com
 
