@@ -1,0 +1,101 @@
+Phase 7: Search by Verse, Symbol, or Spiritual Law
+We’re no longer doing dumb keyword search. We’re building a spiritual forensics tool — capable of dissecting ancient texts by moral theme, symbol, concept, or verse reference across all traditions.
+
+🧭 OBJECTIVE:
+Add tag-based searching (symbols, archetypes, spiritual laws).
+
+Allow verse-level search across all books.
+
+Enable cross-tradition comparison filters (e.g., “karma vs grace,” “logos vs tao”).
+
+🔑 STEP 1: Expand Metadata Schema
+In your sacred texts directory (already structured like data/texts/[Tradition]/[Period]/[Type]), attach a .json metadata file per text or section:
+
+Example: data/texts/Christianity/Ancient/Bible/KJV_Genesis/metadata.json
+json
+Copy
+Edit
+{
+  "tags": ["creation", "duality", "fall", "divine law"],
+  "symbols": ["serpent", "tree", "garden", "breath"],
+  "themes": ["origin", "choice", "free will", "innocence"],
+  "spiritual_laws": ["cause and effect", "temptation", "accountability"],
+  "cross_links": {
+    "Taoism": ["yin and yang", "wu wei"],
+    "Hinduism": ["maya", "dharma"]
+  },
+  "key_verses": {
+    "Genesis 1:1": "In the beginning God created the heavens and the earth.",
+    "Genesis 3:6": "She took of the fruit, and ate..."
+  }
+}
+You can build these metadata JSONs automatically later using AI if needed.
+
+🔍 STEP 2: Implement Semantic Tag Search
+Update your search backend to accept tag-based filters:
+
+python
+Copy
+Edit
+def search_by_tags(tags: list):
+    results = []
+    for doc in vectorstore.similarity_search_with_score(" ".join(tags)):
+        if any(tag in doc.metadata['tags'] for tag in tags):
+            results.append(doc)
+    return results
+📖 STEP 3: Enable Verse-Level Search
+Let the user type something like:
+
+Genesis 3:6
+
+Your code can now parse that string and extract the exact line:
+
+python
+Copy
+Edit
+def find_verse(book: str, chapter: int, verse: int):
+    # Load structured verse DB (could be SQLite or JSON)
+    return verse_db[book][chapter][verse]
+Also include aliases like:
+
+"John 3:16" → match in all Bible versions
+
+"Bhagavad Gita 2:47" → support for major Eastern texts
+
+🔁 STEP 4: Cross-Tradition Symbolic Search
+Let’s say a user types:
+
+“Show me where the serpent appears in multiple traditions.”
+
+You pull every metadata file with "serpent" under "symbols" and display snippets across traditions:
+
+json
+Copy
+Edit
+{
+  "Christianity": ["Genesis - Serpent tempts Eve"],
+  "Hinduism": ["Nāga – divine serpent beings"],
+  "Greek": ["Python of Delphi – slain by Apollo"]
+}
+This will let Divine Mirror reveal universal archetypes.
+
+💡 Bonus Feature: “Spiritual Law Finder”
+Let users search by a law, e.g.:
+
+“Law of Sacrifice” → outputs:
+
+Abraham offering Isaac (Judaism)
+
+Christ crucifixion (Christianity)
+
+Animal sacrifice in Vedas (Hinduism)
+
+Letting go of attachment (Buddhism)
+
+✅ OUTCOME:
+Search like a mystic scholar: by symbol, theme, or law.
+
+Discover hidden patterns between the Tao, Torah, and Trinity.
+
+Pull verses like a digital concordance — anywhere, instantly.
+
