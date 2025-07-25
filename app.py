@@ -310,6 +310,44 @@ st.markdown("""
         border-radius: 0 0 12px 12px !important;
     }
 </style>
+
+<script>
+// Add Enter key functionality to text area
+document.addEventListener('DOMContentLoaded', function() {
+    function addEnterKeyListener() {
+        const textArea = document.querySelector('textarea[aria-label="Question Input"]');
+        if (textArea && !textArea.hasEnterListener) {
+            textArea.hasEnterListener = true;
+            textArea.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    // Find the submit button
+                    const submitButton = document.querySelector('button[data-testid="baseButton-primary"]') ||
+                                       document.querySelector('button:contains("🔮 Unveil Truth")') ||
+                                       Array.from(document.querySelectorAll('button')).find(btn => 
+                                           btn.textContent.includes('Unveil Truth'));
+                    if (submitButton) {
+                        submitButton.click();
+                    }
+                }
+            });
+        }
+    }
+    
+    // Try immediately and then retry periodically
+    addEnterKeyListener();
+    const interval = setInterval(function() {
+        addEnterKeyListener();
+        // Stop trying after elements are found
+        if (document.querySelector('textarea[aria-label="Question Input"]')) {
+            clearInterval(interval);
+        }
+    }, 1000);
+    
+    // Clear interval after 10 seconds to avoid infinite retries
+    setTimeout(() => clearInterval(interval), 10000);
+});
+</script>
 """, unsafe_allow_html=True)
 
 # Constants
@@ -436,12 +474,23 @@ def main():
     # Query interface
     st.markdown('<p class="modern-subtitle">🔍 Ask Your Spiritual Question</p>', unsafe_allow_html=True)
     
+    # Instructions for the question box
+    st.markdown("""
+    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; border: 1px solid rgba(255, 255, 255, 0.2);">
+        <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">
+            💡 <strong>How to ask questions:</strong> Type your question about spiritual teachings, then press <strong>Enter</strong> to submit.
+            <br>Examples: "What did Jesus teach about the Kingdom of God?" or "How has the concept of hell changed over time?"
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     question = st.text_area(
         "Question Input",
         placeholder="What spiritual truth would you like to explore? (e.g., 'What did Jesus actually teach about the Kingdom of God?')",
         height=100,
         key="question_input",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        help="Press Enter to submit your question"
     )
     
     # Modern tabs for comparison modes
