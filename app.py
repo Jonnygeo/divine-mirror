@@ -642,32 +642,27 @@ def main():
             
             st.markdown('</div>', unsafe_allow_html=True)
     
-    # Legal Disclaimer Footer
-    st.markdown("---")
+    # NeoShade AI Footer
     st.markdown("""
-    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; margin: 2rem 0; color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
-        <div style="color: #f97316; font-weight: 600; margin-bottom: 1rem;">⚠️ Disclaimer</div>
-        <p>This is an experimental tool provided for personal, educational, and exploratory use only. All features are 100% free. No financial value, utility, or guarantees are implied or provided.</p>
-        
-        <div style="margin: 1rem 0; font-size: 0.85rem;">
-            <a href="#" style="color: #667eea; text-decoration: none;">View Full Disclaimer</a> | 
-            <a href="#" style="color: #667eea; text-decoration: none;">GitHub Legal Notice</a>
-        </div>
-        
-        <p style="margin-bottom: 0.5rem;">This project is experimental and created for entertainment and exploratory purposes only. It does not offer financial utility, investment promises, or future returns of any kind.</p>
-        
-        <p style="margin-bottom: 0.5rem;">The associated token (if launched) has no inherent value and is not intended for speculation, profit, or investment. It is not a security, utility token, or financial instrument.</p>
-        
-        <p style="margin-bottom: 0;">By interacting with this app or token, you acknowledge that it is for fun, curiosity, and community exploration — not for financial gain.</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Footer
-    st.markdown("""
-    <div style="text-align: center; margin-top: 2rem; padding: 1rem; color: #64748b;">
-        <p>Divine Mirror AI - Revealing truth through ancient wisdom</p>
-        <p style="font-size: 0.9rem;">The Kingdom of God is within you</p>
-    </div>
+    <footer style="background-color: #111; color: #ccc; padding: 30px; font-size: 14px; font-family: Arial, sans-serif; line-height: 1.6; text-align: center;">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p><strong>🔹 Disclaimer:</strong></p>
+        <p>This app is an <strong>experimental tool</strong> developed by <strong>NeoShade AI</strong> for <em>informational, educational, and exploratory use only</em>.</p>
+
+        <p><strong>No financial value, investment utility, legal validity, medical reliability, or psychological support</strong> is guaranteed, implied, or offered. All tools, insights, agents, and outputs are speculative and provided as-is.</p>
+
+        <p>This is not financial, legal, medical, or psychological advice. You assume all responsibility by using this tool. Use at your own discretion and risk.</p>
+
+        <p>NeoShade AI makes no promises of future features, token value, returns, or access. <strong>Everything provided is 100% free to use.</strong> The developer pays all costs personally to ensure transparency and accessibility without commercialization.</p>
+
+        <p>
+          <a href="https://neo-shade.com/disclaimer/" target="_blank" style="color: #44bfff;">🔗 View Full Website Disclaimer</a> |
+          <a href="https://github.com/Jonnygeo/Jonnygeo/blob/main/DISCLAIMER.md" target="_blank" style="color: #44bfff;">GitHub Legal Disclaimer</a>
+        </p>
+
+        <p style="margin-top: 20px; font-style: italic; color: #888;">NeoShade: Cutting through the noise with code, conscience, and clarity.</p>
+      </div>
+    </footer>
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
