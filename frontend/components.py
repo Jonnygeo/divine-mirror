@@ -182,7 +182,7 @@ def render_timeline_view(results):
                 st.altair_chart(timeline_chart, use_container_width=True)
 
 def render_source_citations(sources):
-    """Renders the source citations section"""
+    """Renders the source citations section with white text for visibility"""
     if not sources:
         st.info("No sources cited for this query.")
         return
@@ -190,10 +190,11 @@ def render_source_citations(sources):
     st.markdown("### Sources")
     
     for i, source in enumerate(sources):
-        st.markdown(f"**{i+1}. {source.get('title', 'Unknown Source')}**")
-        st.markdown(f"*{source.get('tradition', '')} - {source.get('period', '')}*")
+        # Use white text styling for better visibility
+        st.markdown(f'<p style="color: white; font-weight: bold;">{i+1}. {source.get("title", "Unknown Source")}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="color: white; font-style: italic;">{source.get("tradition", "")} - {source.get("period", "")}</p>', unsafe_allow_html=True)
         if "citation" in source:
-            st.markdown(f"Citation: {source['citation']}")
+            st.markdown(f'<p style="color: white;">Citation: {source["citation"]}</p>', unsafe_allow_html=True)
         if "relevance" in source:
-            st.markdown(f"Relevance: {source['relevance']}")
+            st.markdown(f'<p style="color: white;">Relevance: {source["relevance"]}</p>', unsafe_allow_html=True)
         st.divider()

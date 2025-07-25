@@ -632,13 +632,13 @@ def main():
                 st.markdown("### 📚 Source Citations")
                 with st.expander("View Source Documentation"):
                     for source in result["sources"]:
-                        st.markdown(f"**{source.get('title', 'Unknown Title')}**")
-                        st.markdown(f"- Tradition: {source.get('tradition', 'Unknown')}")
-                        st.markdown(f"- Period: {source.get('period', 'Unknown')}")
-                        st.markdown(f"- Citation: {source.get('citation', 'No citation')}")
+                        st.markdown(f'<p style="color: white; font-weight: bold; margin-bottom: 0.5rem;">{source.get("title", "Unknown Title")}</p>', unsafe_allow_html=True)
+                        st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Tradition: {source.get("tradition", "Unknown")}</p>', unsafe_allow_html=True)
+                        st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Period: {source.get("period", "Unknown")}</p>', unsafe_allow_html=True)
+                        st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Citation: {source.get("citation", "No citation")}</p>', unsafe_allow_html=True)
                         if source.get('relevance'):
-                            st.markdown(f"- Relevance: {source['relevance']}")
-                        st.markdown("---")
+                            st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Relevance: {source["relevance"]}</p>', unsafe_allow_html=True)
+                        st.markdown('<hr style="border-color: rgba(255, 255, 255, 0.3); margin: 1rem 0;">', unsafe_allow_html=True)
             
             st.markdown('</div>', unsafe_allow_html=True)
     
