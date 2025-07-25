@@ -1,0 +1,100 @@
+
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ZSJZYYKG3L');
+
+
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-12241170-1');
+  gtag('config', 'GA_MEASUREMENT_ID', {
+    'linker': {
+      'domains': ['sacred-texts.com', 'next.sacred-texts.com', 'happyvegan.jp', 'next.happyvegan.jp', 'sacred-texts.online', 'next.sacred-texts.online']
+    }
+  });
+
+
+404: file not found | Sacred Texts Archive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "404: file not found | Sacred Texts Archive",
+  "description": "If you got to this page from an external site it is possible that the page you want is still at the sacred-texts.com. To find the page you linked to fol...",
+  "url": "https://sacred-texts.com/404.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Internet Sacred Text Archive",
+    "url": "https://sacred-texts.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Internet Sacred Text Archive",
+    "url": "https://sacred-texts.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sacred-texts.com/img/logo.jpg"
+    }
+  },
+  "inLanguage": "en-US"
+}
+
+
+
+
+
+
+File not found (error 404)
+
+ The page you requested from the 
+ 
+
+ Internet Sacred Texts Archive
+ was not found.  The page was moved or the name
+ was entered incorrectly.  Click on the link above to
+ access the main index.
+
+ If you got to this page from an external site it is
+ possible that the page you want is still at the sacred-texts.com.
+ To find the page you linked to follow this link to the
+ The Internet Sacred Archive search page.
+ You may also wish to notify the maintainer of the link which you followed.
+
+ If you got this page by following a link at sacred-texts, please let
+ click here to contact us and 
+ let us know that there is a broken link.
+ 
