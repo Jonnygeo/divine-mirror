@@ -234,9 +234,10 @@ st.markdown("""
     
     /* Modern text styling */
     .modern-text {
-        color: #e2e8f0;
+        color: #ffffff !important;
         line-height: 1.6;
         font-size: 1rem;
+        margin: 0.5rem 0;
     }
     
     .modern-subtitle {
