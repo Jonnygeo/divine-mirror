@@ -1,0 +1,6 @@
+# Zoroastrianism - Medieval - Commentary
+
+Directory for commentary texts from the medieval period of Zoroastrianism.
+
+## Purpose
+Contains scholarly analysis and commentary on the texts.
