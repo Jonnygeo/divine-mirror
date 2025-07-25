@@ -162,6 +162,11 @@ Focus on historical accuracy and scholarly analysis."""
             # Call Smart Model Switcher (OpenAI with DeepSeek fallback)
             result = smart_generate_json(prompt, model=self.model_name, max_tokens=2000)
             
+            # Check if we need to use fallback response
+            if result.get("needs_fallback"):
+                logger.info("Smart model returned needs_fallback flag, using fallback response")
+                return self._get_fallback_response(question, traditions)
+            
             # Format sources correctly
             source_citations = self._construct_source_citations(all_documents)
             
@@ -343,8 +348,8 @@ Focus on respectful comparison and scholarly analysis."""
                     "Original message was universal accessibility - Modern restricts through doctrine and hierarchy"
                 ],
                 sources=[
-                    SourceCitation(title="Luke 17:21", tradition="Christianity", period="Classical", citation="Kingdom of God is within you", relevance="Core teaching about inner divine access"),
-                    SourceCitation(title="Gospel of Thomas Saying 3", tradition="Gnosticism", period="Classical", citation="The Kingdom is inside you and outside you", relevance="Preserved original understanding")
+                    {"title": "Luke 17:21", "tradition": "Christianity", "period": "Classical", "citation": "Kingdom of God is within you", "relevance": "Core teaching about inner divine access"},
+                    {"title": "Gospel of Thomas Saying 3", "tradition": "Gnosticism", "period": "Classical", "citation": "The Kingdom is inside you and outside you", "relevance": "Preserved original understanding"}
                 ]
             )
         
@@ -360,8 +365,8 @@ Focus on respectful comparison and scholarly analysis."""
                     "Original focused on spiritual transformation - Modern uses fear for institutional control"
                 ],
                 sources=[
-                    SourceCitation(title="Hebrew Sheol Analysis", tradition="Judaism", period="Ancient", citation="Place of the dead, not torture", relevance="Original meaning before mistranslation"),
-                    SourceCitation(title="Greek Hades Definition", tradition="Christianity", period="Classical", citation="Underworld, place of departed souls", relevance="Pre-Latin translation meaning")
+                    {"title": "Hebrew Sheol Analysis", "tradition": "Judaism", "period": "Ancient", "citation": "Place of the dead, not torture", "relevance": "Original meaning before mistranslation"},
+                    {"title": "Greek Hades Definition", "tradition": "Christianity", "period": "Classical", "citation": "Underworld, place of departed souls", "relevance": "Pre-Latin translation meaning"}
                 ]
             )
         
@@ -377,8 +382,8 @@ Focus on respectful comparison and scholarly analysis."""
                     "Original taught spiritual liberation - Modern created institutional dependency"
                 ],
                 sources=[
-                    SourceCitation(title="John 8:32", tradition="Christianity", period="Classical", citation="Truth will set you free", relevance="Core liberation teaching"),
-                    SourceCitation(title="Matthew 23:8-10", tradition="Christianity", period="Classical", citation="Rejection of religious hierarchy", relevance="Anti-institutional message")
+                    {"title": "John 8:32", "tradition": "Christianity", "period": "Classical", "citation": "Truth will set you free", "relevance": "Core liberation teaching"},
+                    {"title": "Matthew 23:8-10", "tradition": "Christianity", "period": "Classical", "citation": "Rejection of religious hierarchy", "relevance": "Anti-institutional message"}
                 ]
             )
         
@@ -394,6 +399,6 @@ Focus on respectful comparison and scholarly analysis."""
                     "Original: Universal love - Modern: Conditional acceptance"
                 ],
                 sources=[
-                    SourceCitation(title="Comprehensive Truth Analysis", tradition="Multi-tradition", period="All", citation="JonnyG's Bible Dissection Project", relevance="Complete institutional manipulation analysis")
+                    {"title": "Comprehensive Truth Analysis", "tradition": "Multi-tradition", "period": "All", "citation": "JonnyG's Bible Dissection Project", "relevance": "Complete institutional manipulation analysis"}
                 ]
             )

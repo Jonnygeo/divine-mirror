@@ -93,16 +93,26 @@ def smart_generate_json(prompt: str, model: str = "gpt-4o", max_tokens: int = 50
             max_tokens=max_tokens,
             response_format={"type": "json_object"}
         )
-        return json.loads(response.choices[0].message.content.strip())
+        result = json.loads(response.choices[0].message.content.strip())
+        # Check if result has meaningful content
+        if not any(result.get(key) for key in ['original_teachings', 'modern_interpretations', 'comparison']):
+            print("OpenAI returned empty content, triggering fallback")
+            return {"needs_fallback": True}
+        return result
     except Exception as e:
         print(f"OpenAI JSON Error: {e}")
         
         # Fall back to regular generation and try to parse
         result = smart_generate(prompt, model=model, max_tokens=max_tokens)
         try:
-            return json.loads(result)
+            parsed = json.loads(result)
+            if not any(parsed.get(key) for key in ['original_teachings', 'modern_interpretations', 'comparison']):
+                print("Fallback model returned empty content")
+                return {"needs_fallback": True}
+            return parsed
         except json.JSONDecodeError:
-            return {"error": "Unable to generate valid JSON response"}
+            print("Unable to parse JSON, triggering fallback")
+            return {"needs_fallback": True}
 
 def create_spiritual_fallback_response(prompt: str) -> str:
     """Create a spiritual fallback response based on Yeshua's authentic teachings"""

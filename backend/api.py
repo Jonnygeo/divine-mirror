@@ -191,6 +191,12 @@ async def query_spiritual_truth(
                 question=request.question,
                 traditions=request.traditions
             )
+        
+        # Check if response has meaningful content, if not use direct fallback
+        if (not response.original_teachings and not response.modern_interpretations and 
+            not response.comparison and not response.key_differences):
+            print("Empty response detected, using direct fallback")
+            response = llm_chain._get_fallback_response(request.question, request.traditions)
             
         return response
     
