@@ -1,7 +1,7 @@
 # Divine Mirror AI - Sacred Text Database Inventory
 
 ## 📊 **Complete Database Statistics**
-- **Total Documents**: 135 sacred texts
+- **Total Documents**: 147 sacred texts
 - **Processing Status**: All texts successfully integrated
 - **Semantic Chunks**: Generated for comprehensive cross-referencing
 - **Source Quality**: Authentic texts from Project Gutenberg, Sacred-texts.com, and verified repositories
@@ -72,6 +72,26 @@
 ## 🔍 **Jewish Texts Collection**
 - Torah teachings analysis
 - Classical Judaism vs modern interpretations
+
+## 🙏 **Sikh Texts Collection**
+- **Guru Granth Sahib** - Central Sikh scripture
+- Medieval devotional poetry and philosophy
+
+## 🕉️ **Jain Texts Collection**  
+- **Acharanga Sutra** - Fundamental Jain ethics
+- Ancient non-violence and liberation teachings
+
+## 📚 **Confucian Texts Collection**
+- **Mencius** - Confucian moral philosophy
+- **I Ching** - Book of Changes and wisdom
+
+## ⛩️ **Shinto Texts Collection**
+- **Kojiki Excerpts** - Ancient Japanese creation mythology
+- Kami worship and nature spirituality
+
+## 🏔️ **Indigenous Wisdom Collection**
+- **Native American Spiritual Teachings** - Lakota, Cherokee, Hopi wisdom
+- Sacred relationship with Mother Earth
 
 ## 🗿 **Other Spiritual Traditions**
 - Gnostic texts (Gospel of Thomas focus)
