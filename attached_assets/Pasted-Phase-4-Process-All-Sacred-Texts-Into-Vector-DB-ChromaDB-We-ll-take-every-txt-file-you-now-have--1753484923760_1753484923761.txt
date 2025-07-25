@@ -1,0 +1,123 @@
+Phase 4: Process All Sacred Texts Into Vector DB (ChromaDB)
+We'll take every .txt file you now have in the data/texts/ structure and:
+
+Extract clean text
+
+Generate embeddings using OpenAI or DeepSeek
+
+Store them in ChromaDB for fast semantic search
+
+Attach metadata like:
+
+tradition, period, text_type
+
+source, title, and chunk_id
+
+✅ Step 1: Requirements
+Make sure your replit.nix or requirements.txt has:
+
+txt
+Copy
+Edit
+chromadb
+openai
+tiktoken
+If you’re using DeepSeek Embeddings, you'll need to load from their API or use HuggingFace Transformers.
+
+🧠 Step 2: Embedding + Ingestion Script
+Here's the full Python script:
+
+python
+Copy
+Edit
+import os
+import chromadb
+from chromadb.config import Settings
+from chromadb.utils import embedding_functions
+
+import tiktoken
+from tqdm import tqdm
+
+CHUNK_SIZE = 512  # tokens
+DB_DIR = "chromadb_storage"
+
+client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet", persist_directory=DB_DIR))
+openai_embedder = embedding_functions.OpenAIEmbeddingFunction(api_key=os.getenv("OPENAI_API_KEY"))
+
+collection = client.get_or_create_collection("sacred_texts", embedding_function=openai_embedder)
+
+def tokenize(text, model="gpt-3.5-turbo"):
+    enc = tiktoken.encoding_for_model(model)
+    return enc.encode(text)
+
+def chunk_text(text, size=CHUNK_SIZE):
+    tokens = tokenize(text)
+    return [" ".join(tokens[i:i+size]) for i in range(0, len(tokens), size)]
+
+def process_file(filepath, metadata):
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            raw = f.read()
+        chunks = chunk_text(raw)
+        for i, chunk in enumerate(chunks):
+            doc_id = f"{metadata['title']}_{i}"
+            collection.add(
+                documents=[chunk],
+                metadatas=[metadata],
+                ids=[doc_id]
+            )
+    except Exception as e:
+        print("ERROR:", filepath, e)
+
+def walk_and_ingest(base_dir="data/texts"):
+    for root, dirs, files in os.walk(base_dir):
+        for file in files:
+            if file.endswith(".txt"):
+                parts = root.split(os.sep)
+                if len(parts) >= 5:
+                    tradition = parts[2]
+                    period = parts[3]
+                    text_type = parts[4]
+                else:
+                    continue
+                title = file.replace(".txt", "")
+                meta = {
+                    "tradition": tradition,
+                    "period": period,
+                    "type": text_type,
+                    "title": title,
+                    "path": os.path.join(root, file)
+                }
+                process_file(meta["path"], meta)
+
+if __name__ == "__main__":
+    walk_and_ingest()
+    client.persist()
+🧪 Step 3: Verify Ingested Texts
+After you run this, verify the total number of vectors by running:
+
+python
+Copy
+Edit
+print(collection.count())  # should show total chunks indexed
+🧠 Step 4: Enable Search
+Now your app can semantically search any sacred text with:
+
+python
+Copy
+Edit
+results = collection.query(
+    query_texts=["What did Yeshua say about the kingdom within?"],
+    n_results=5
+)
+for r in results['documents'][0]:
+    print(r)
+🧭 What’s Next (Phase 5)
+🧬 Auto-tagging each chunk with topic tags (e.g. salvation, heaven, Sheol, reincarnation)
+
+📖 UI filtering per tradition, text, and date
+
+🧠 GPT-assisted comparison mode
+
+🎙️ Audio reading mode for mobile app
+

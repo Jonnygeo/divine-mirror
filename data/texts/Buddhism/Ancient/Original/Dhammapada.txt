@@ -1,1 +1,208 @@
-Manual download may be required for https://www.sacred-texts.com/bud/sbe10/index.htm
+
+ 
+
+
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZSJZYYKG3L');
+
+
+ 
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Sacred Books of the East, Vol. 10: The Dhammapada and Sut... | Sacred Texts Archive
+ 
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://sacred-texts.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Buddhism",
+      "item": "https://sacred-texts.com/bud/"
+    }
+  ]
+}
+
+
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Sacred Books of the East, Vol. 10: The Dhammapada and Sut... | Sacred Texts Archive",
+  "description": "Buddhist scriptures, sutras, and teachings from Theravada, Mahayana, and Zen traditions. Browse 43+ texts in this comprehensive collection.",
+  "url": "https://sacred-texts.com/bud/sbe10/index.htm",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Internet Sacred Text Archive",
+    "url": "https://sacred-texts.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Internet Sacred Text Archive",
+    "url": "https://sacred-texts.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sacred-texts.com/img/logo.jpg"
+    }
+  },
+  "inLanguage": "en-US",
+  "genre": [
+    "Religion",
+    "Buddhism",
+    "Philosophy"
+  ],
+  "datePublished": "1881"
+}
+
+
+
+
+
+ 
+ 
+ 
+ Sacred Texts&nbsp;
+ Buddhism&nbsp;
+ Buy this Book at Amazon.com
+ 
+ 
+ 
+ 
+ 
+ The Dhammapada
+ Translated from the P&acirc;li by F. Max M&uuml;ller
+ The Sutta-Nip&acirc;ta
+ Translated from the P&acirc;li by V. Fausb&ouml;ll
+ Oxford, the Clarendon Press
+ [1881]
+ Vol. X of The Sacred Books of the East
+ 
+ 
+ 
+ 
+ 
+ 
+ Contents&nbsp;&nbsp;&nbsp;
+ Start Reading&nbsp;&nbsp;&nbsp;
+ Text [Zipped]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ The Dhammapada
+ Title Page
+ Contents
+ Introduction
+ Chapter I. The Twin-Verses.
+ Chapter II. On Earnestness.
+ Chapter III. Thought.
+ Chapter IV. Flowers.
+ Chapter V. The Fool.
+ Chapter VI. The Wise Man (Pandita).
+ Chapter VII. The Venerable (Arhat).
+ Chapter VIII. The Thousands.
+ Chapter IX. Evil.
+ Chapter X. Punishment.
+ Chapter XI. Old Age.
+ Chapter XII. Self.
+ Chapter XIII. The World.
+ Chapter XIV. The Buddha (The Awakened).
+ Chapter XV. Happiness.
+ Chapter XVI. Pleasure.
+ Chapter XVII. Anger.
+ Chapter XVIII. Impurity.
+ Chapter XIX. The Just.
+ Chapter XX. The Way.
+ Chapter XXI. Miscellaneous.
+ Chapter XXII. The Downward Course.
+ Chapter XXIII. The Elephant.
+ Chapter XXIV. Thirst.
+ Chapter XXV. The Bhikshu (Mendicant).
+ Chapter XXVI. The Br&acirc;hmana (Arhat).
+ 
+ 
+ The Sutta-Nip&acirc;ta
+ Title Page
+ Contents
+ Glossary
+ Introduction
+ I. Uragavagga.
+ II. K&ucirc;lavagga.
+ III. Mah&acirc;vagga.
+ IV. Atthakavagga.
+ V. P&acirc;r&acirc;yanavagga.
+ 
+
+
+
+
+Sacred Texts | 
+Buddhism
+
+
+
+
+
+&laquo; Previous: Shinran and His Work: Index of Japanese Terms and Sentences
+
+
+Index
+
+
+Next: Sacred Books of the East, Vol. 10: The Dhammapada and Sut... &raquo;
+
+
+
+
+
+
+
