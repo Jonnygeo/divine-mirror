@@ -70,20 +70,19 @@ st.markdown("""
     
     /* Modern input styling */
     .stTextArea textarea {
-        background: rgba(0, 0, 0, 0.4) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: #000000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
         border-radius: 16px !important;
         color: #ffffff !important;
         font-size: 1rem !important;
         padding: 1.5rem !important;
-        backdrop-filter: blur(10px) !important;
         transition: all 0.3s ease !important;
     }
     
     .stTextArea textarea:focus {
         border-color: #667eea !important;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
-        background: rgba(0, 0, 0, 0.6) !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+        background: #000000 !important;
     }
     
     .stTextArea textarea::placeholder {
@@ -93,37 +92,37 @@ st.markdown("""
     
     /* Modern selectbox styling */
     .stSelectbox > div > div {
-        background: rgba(0, 0, 0, 0.4) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: #000000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
         border-radius: 12px !important;
-        backdrop-filter: blur(10px) !important;
         color: #ffffff !important;
     }
     
     .stSelectbox > div > div > div {
         color: #ffffff !important;
+        background: #000000 !important;
     }
     
     .stMultiSelect > div > div {
-        background: rgba(0, 0, 0, 0.4) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: #000000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
         border-radius: 12px !important;
-        backdrop-filter: blur(10px) !important;
         color: #ffffff !important;
     }
     
     .stMultiSelect > div > div > div {
         color: #ffffff !important;
+        background: #000000 !important;
     }
     
     /* Fix dropdown options */
     .stSelectbox div[data-baseweb="select"] > div {
-        background: rgba(0, 0, 0, 0.8) !important;
+        background: #000000 !important;
         color: #ffffff !important;
     }
     
     .stMultiSelect div[data-baseweb="select"] > div {
-        background: rgba(0, 0, 0, 0.8) !important;
+        background: #000000 !important;
         color: #ffffff !important;
     }
     
