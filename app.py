@@ -311,6 +311,46 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 0 0 12px 12px !important;
     }
+    
+    /* Multiselect and text input styling */
+    .stMultiSelect label, .stSelectbox label, .stTextArea label {
+        color: white !important;
+        font-weight: 500 !important;
+        font-size: 1rem !important;
+    }
+    
+    .stMultiSelect > div > div {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+    }
+    
+    .stMultiSelect > div > div > div {
+        color: white !important;
+    }
+    
+    .stMultiSelect span {
+        color: white !important;
+    }
+    
+    /* Selectbox styling */
+    .stSelectbox > div > div {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+    }
+    
+    /* Tab content text */
+    .stTabs [data-baseweb="tab-panel"] p {
+        color: white !important;
+    }
+    
+    /* Error messages */
+    .stAlert {
+        background-color: rgba(244, 63, 94, 0.1) !important;
+        border: 1px solid rgba(244, 63, 94, 0.3) !important;
+        color: #f87171 !important;
+    }
 </style>
 
 <script>
@@ -539,6 +579,16 @@ def main():
     with tab1:
         st.markdown('<p class="modern-text">Compare original ancient teachings with modern interpretations</p>', unsafe_allow_html=True)
         comparison_mode = "modern_vs_original"
+        
+        # Instructions for tradition selection
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); border-left: 4px solid #667eea; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+            <p style="color: white; margin: 0; font-size: 0.9rem;">
+                💡 <strong style="color: #667eea;">How to select traditions:</strong> Click the dropdown below to choose religious traditions for analysis. You can select multiple traditions to compare their teachings.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
         selected_traditions = st.multiselect(
             "Select religious traditions to analyze:",
             available_traditions,
@@ -549,6 +599,16 @@ def main():
     with tab2:
         st.markdown('<p class="modern-text">Compare how different traditions approach the same spiritual concepts</p>', unsafe_allow_html=True)
         comparison_mode = "across_traditions"
+        
+        # Instructions for cross-tradition selection
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); border-left: 4px solid #667eea; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+            <p style="color: white; margin: 0; font-size: 0.9rem;">
+                🌍 <strong style="color: #667eea;">Cross-tradition analysis:</strong> Select 2 or more traditions to see how they approach similar spiritual concepts. Click the dropdown to add traditions.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
         selected_traditions = st.multiselect(
             "Select traditions to compare:",
             available_traditions,
@@ -559,6 +619,16 @@ def main():
     with tab3:
         st.markdown('<p class="modern-text">Track how teachings evolved across historical periods</p>', unsafe_allow_html=True)
         comparison_mode = "across_time_periods"
+        
+        # Instructions for timeline selection
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); border-left: 4px solid #667eea; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+            <p style="color: white; margin: 0; font-size: 0.9rem;">
+                📈 <strong style="color: #667eea;">Timeline analysis:</strong> Select traditions and time periods to track how teachings evolved. Click dropdowns to add options.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
         selected_traditions = st.multiselect(
             "Select traditions for timeline analysis:",
             available_traditions,
