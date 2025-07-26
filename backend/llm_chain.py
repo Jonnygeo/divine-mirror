@@ -162,9 +162,9 @@ Focus on historical accuracy and scholarly analysis."""
             # Call Smart Model Switcher (OpenAI with DeepSeek fallback)
             result = smart_generate_json(prompt, model=self.model_name, max_tokens=2000)
             
-            # Check if we need to use fallback response
-            if result.get("needs_fallback"):
-                logger.info("Smart model returned needs_fallback flag, using fallback response")
+            # If OpenAI quota exceeded but we have documents, use enhanced response
+            if result.get("needs_fallback") and not all_documents:
+                logger.info("No documents found and model needs fallback, using enhanced fallback")
                 return self._get_fallback_response(question, traditions)
             
             # Format sources correctly
@@ -183,8 +183,12 @@ Focus on historical accuracy and scholarly analysis."""
         
         except Exception as e:
             logger.error(f"Error in compare_modern_vs_original: {str(e)}")
-            # Return enhanced fallback response using truth analysis
-            return self._get_fallback_response(question, traditions)
+            # Only use fallback if no documents were retrieved
+            if not all_documents:
+                return self._get_fallback_response(question, traditions)
+            
+            # If we have documents but API failed, create response from document content
+            return self._create_document_based_response(question, all_documents, "modern_vs_original")
     
     def compare_across_time_periods(
         self,
@@ -258,8 +262,12 @@ Focus on historical development and contextual changes."""
         
         except Exception as e:
             logger.error(f"Error in compare_across_time_periods: {str(e)}")
-            # Return enhanced fallback response
-            return self._get_fallback_response(question, traditions)
+            # Only use fallback if no documents were retrieved
+            if not all_documents:
+                return self._get_fallback_response(question, traditions)
+            
+            # If we have documents but API failed, create response from document content
+            return self._create_document_based_response(question, all_documents, "across_time_periods")
     
     def compare_across_traditions(
         self,
@@ -329,8 +337,65 @@ Focus on respectful comparison and scholarly analysis."""
         
         except Exception as e:
             logger.error(f"Error in compare_across_traditions: {str(e)}")
-            # Return enhanced fallback response
-            return self._get_fallback_response(question, traditions)
+            # Only use fallback if no documents were retrieved
+            if not all_documents:
+                return self._get_fallback_response(question, traditions)
+            
+            # If we have documents but API failed, create response from document content
+            return self._create_document_based_response(question, all_documents, "across_traditions")
+    
+    def _create_document_based_response(self, question: str, documents: List[Document], mode: str) -> QueryResponse:
+        """Create response directly from retrieved documents when AI models are unavailable"""
+        if not documents:
+            return self._get_fallback_response(question, traditions=[])
+        
+        # Extract content from documents
+        document_contents = []
+        source_citations = []
+        
+        for doc in documents:
+            metadata = doc.metadata
+            content = doc.page_content[:500] + "..." if len(doc.page_content) > 500 else doc.page_content
+            
+            document_contents.append(f"""
+**{metadata.get('title', 'Unknown Source')}** ({metadata.get('tradition', 'Unknown')}, {metadata.get('period', 'Unknown')})
+{content}
+""")
+            
+            source_citations.append(SourceCitation(
+                title=metadata.get('title', 'Unknown Source'),
+                tradition=metadata.get('tradition', 'Unknown'),
+                period=metadata.get('period', 'Unknown'),
+                citation=content[:200] + "..." if len(content) > 200 else content,
+                relevance="Retrieved from sacred text database"
+            ))
+        
+        # Create document-based analysis
+        combined_content = "\n---\n".join(document_contents)
+        
+        if mode == "modern_vs_original":
+            return QueryResponse(
+                original_teachings=f"Based on sacred texts in our database:\n\n{combined_content}",
+                modern_interpretations="Analysis of modern interpretations requires AI processing. The documents above represent authentic source material for comparison.",
+                comparison="Direct sacred text content provided due to AI model limitations. These represent authentic historical sources for your spiritual research.",
+                key_differences=["Authentic source material provided", "AI analysis temporarily unavailable", "Direct access to sacred text database maintained"],
+                sources=source_citations
+            )
+        elif mode == "across_traditions":
+            return QueryResponse(
+                traditions_comparison={"multi_tradition": combined_content},
+                comparison="Cross-tradition analysis from sacred text database:\n\n" + combined_content,
+                key_differences=["Multiple tradition sources retrieved", "Direct database access maintained", "AI synthesis temporarily unavailable"],
+                sources=source_citations
+            )
+        else:  # across_time_periods
+            return QueryResponse(
+                evolution_analysis=f"Historical sources from database:\n\n{combined_content}",
+                timeline_data=[{"period": "Multi-period", "sources": combined_content}],
+                comparison="Timeline analysis from sacred text database provided due to AI limitations.",
+                key_differences=["Direct historical source access", "Database query successful", "AI timeline analysis unavailable"],
+                sources=source_citations
+            )
     
     def _get_fallback_response(self, question: str, traditions: List[str]) -> QueryResponse:
         """Enhanced fallback response using comprehensive truth analysis"""

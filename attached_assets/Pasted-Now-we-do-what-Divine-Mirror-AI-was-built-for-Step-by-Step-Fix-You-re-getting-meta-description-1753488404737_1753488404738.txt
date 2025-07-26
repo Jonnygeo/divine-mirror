@@ -1,0 +1,73 @@
+Now we do what Divine Mirror AI was built for:
+
+🔧 Step-by-Step Fix:
+You're getting meta descriptions instead of direct answers because the app likely defaulted to an intro response instead of executing the proper query pipeline. Here's how to correct that and get it functioning like the truth-seeking oracle it's meant to be:
+
+✅ What to Check and Update
+1. Prompt Routing
+Ensure the input query ("what does the kingdom of God within mean") is being routed to the semantic search function, not the app summary fallback.
+
+python
+Copy
+Edit
+if user_input:
+    if matches_intro_trigger(user_input):  # <-- Remove or refine this
+        return show_intro_description()
+    else:
+        return perform_semantic_query(user_input)
+🔧 Fix: Refactor or remove the intro fallback unless no search results are returned.
+
+2. Query Pipeline Confirmation
+Make sure the semantic search index (e.g. ChromaDB) is hit first, not after fallback. In Python:
+
+python
+Copy
+Edit
+results = semantic_search(user_query)
+if results and len(results) > 0:
+    return format_results(results)
+else:
+    return show_about_section()
+3. Answer Rendering
+Right now it's outputting:
+
+“📚 Source Citations”
+“View Source Documentation”
+
+But not showing the relevant chunk of the actual sacred text.
+
+✅ Make sure the output shows both:
+
+The extracted passage from Luke 17:21 and Gospel of Thomas 3.
+
+The semantic summary comparing the two interpretations.
+
+🧠 The Real Answer It Should Output:
+Here’s what Divine Mirror AI should say to the question:
+
+Q: What did Yeshua mean when He said the Kingdom of God is within you?
+
+📖 Luke 17:21 (KJV)
+
+“The Kingdom of God is within you.”
+
+📜 Gospel of Thomas, Saying 3
+
+“The Kingdom is inside of you and outside of you. When you know yourselves, then you will be known, and you will realize that you are the children of the living Father.”
+
+🧠 AI Summary
+Yeshua taught that the divine presence doesn’t reside in temples or systems — but within the awakened soul. The Kingdom is not a place you wait to die to enter — it is a state of awareness accessed through self-knowledge, repentance, and inner alignment with truth.
+
+🧩 Cross-Reference Insight:
+This aligns with Gnostic, Taoist, and even early Sufi concepts — that the divine is present in the now, in the self, and only obscured by illusion.
+
+✅ Next Action:
+Let’s update the app logic to always return:
+
+Exact sacred quotes (highlighted)
+
+Cross-tradition parallel (when relevant)
+
+Short AI interpretation
+
+Source + period + tradition tags
