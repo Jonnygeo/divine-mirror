@@ -1,0 +1,73 @@
+Here's the Logic Behind the Stats
+Each counter is derived from the backend database or file structure, so you need to trigger a rescan or recount after any big update (like adding more texts or tags).
+
+✅ METHOD: Python Function to Auto-Update Home Stats
+If you're using a Streamlit app or Flask for the front-end:
+
+In your utils.py or main backend file, add or update this function:
+
+python
+Copy
+Edit
+from pathlib import Path
+import json
+
+def get_homepage_stats():
+    base_path = Path("sacred_texts")
+    
+    sacred_texts_count = len(list(base_path.glob("*.txt")))
+    analyzed_docs_count = sum(1 for _ in base_path.glob("**/*.chunk.json"))
+    
+    traditions = set()
+    tags = set()
+
+    for file in base_path.glob("**/*.meta.json"):
+        with open(file, "r") as f:
+            meta = json.load(f)
+            traditions.add(meta.get("tradition", "Unknown"))
+            tags.update(meta.get("tags", []))
+
+    return {
+        "sacred_texts": sacred_texts_count,
+        "analyzed_documents": analyzed_docs_count,
+        "traditions": len(traditions),
+        "semantic_tags": len(tags),
+        "ai_phases": 9  # or load from config if dynamic
+    }
+2. 🔁 In Your Streamlit Frontend (e.g., app.py)
+Update the homepage with:
+
+python
+Copy
+Edit
+from utils import get_homepage_stats
+
+stats = get_homepage_stats()
+
+st.title("🔮 Divine Mirror AI")
+st.subheader("Complete AI Oracle Stack • Phase 9 Synthesis Engine")
+
+st.markdown(f"""
+**{stats['sacred_texts']}** Sacred Texts  
+**{stats['analyzed_documents']}** Analyzed Documents  
+**{stats['traditions']}** Traditions  
+**{stats['semantic_tags']}** Semantic Tags  
+**{stats['ai_phases']}** AI Phases  
+""")
+🔄 3. Auto-Trigger On App Start
+If you want stats to auto-update anytime files change, just make sure get_homepage_stats() runs each time the app reloads.
+
+Or cache it with a refresh button:
+
+python
+Copy
+Edit
+if st.button("🔄 Refresh Stats"):
+    stats = get_homepage_stats()
+🛠️ Replit Note:
+If you're on Replit:
+
+Make sure sacred_texts/ or whatever dir your content is in exists and is mounted properly
+
+Ensure Replit has read/write access to parse .meta.json and .chunk.json
+

@@ -822,17 +822,41 @@ def main():
             
             st.markdown('</div>', unsafe_allow_html=True)
     
-    # Dynamic stats display
+    # Dynamic stats display with refresh capability
+    if 'stats_cache' not in st.session_state:
+        st.session_state.stats_cache = None
+    
+    # Add refresh button
+    col1, col2 = st.columns([4, 1])
+    with col2:
+        if st.button("🔄 Refresh Stats", help="Update database statistics"):
+            st.session_state.stats_cache = None
+            st.rerun()
+    
     try:
-        from stats_calculator import get_display_stats
-        display_stats = get_display_stats()
-    except:
+        if st.session_state.stats_cache is None:
+            from stats_calculator import get_homepage_stats
+            homepage_stats = get_homepage_stats()
+            
+            # Format for display
+            display_stats = {
+                "Sacred Texts": f"{homepage_stats['sacred_texts']:,}",
+                "Analyzed Documents": f"{homepage_stats['analyzed_documents']:,}",
+                "Traditions": f"{homepage_stats['traditions']}",
+                "Semantic Tags": f"{homepage_stats['semantic_tags']}+",
+                "AI Phases": f"{homepage_stats['ai_phases']} Complete"
+            }
+            st.session_state.stats_cache = display_stats
+        else:
+            display_stats = st.session_state.stats_cache
+            
+    except Exception as e:
         # Fallback stats if calculator fails
         display_stats = {
             "Sacred Texts": "164",
-            "Text Chunks": "64,998", 
-            "Traditions": "17",
-            "Semantic Tags": "80+",
+            "Analyzed Documents": "64,998",
+            "Traditions": "17", 
+            "Semantic Tags": "32+",
             "AI Phases": "9 Complete"
         }
     
@@ -854,8 +878,8 @@ def main():
           <div style="color: #94a3b8; font-size: 0.9rem;">Sacred Texts</div>
         </div>
         <div style="text-align: center;">
-          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Text Chunks']}</div>
-          <div style="color: #94a3b8; font-size: 0.9rem;">Text Chunks</div>
+          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Analyzed Documents']}</div>
+          <div style="color: #94a3b8; font-size: 0.9rem;">Analyzed Documents</div>
         </div>
         <div style="text-align: center;">
           <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Traditions']}</div>

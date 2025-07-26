@@ -14,6 +14,7 @@ def calculate_database_stats():
     stats = {
         "total_documents": 0,
         "total_chunks": 0,
+        "analyzed_documents": 0,
         "traditions": set(),
         "periods": set(),
         "text_types": set(),
@@ -45,9 +46,24 @@ def calculate_database_stats():
         except Exception as e:
             print(f"❌ Error loading text index: {e}")
     
-    # Method 2: Count files directly
+    # Method 2: Count files directly and scan for metadata
     text_files = glob.glob("data/texts/**/*.txt", recursive=True)
     stats["total_documents"] = len(text_files)
+    
+    # Count analyzed documents (chunked files)
+    chunk_files = glob.glob("data/**/*.chunk.json", recursive=True)
+    meta_files = glob.glob("data/**/*.meta.json", recursive=True)
+    stats["analyzed_documents"] = len(chunk_files) + len(meta_files)
+    
+    # Parse metadata files for additional stats
+    for meta_file in meta_files:
+        try:
+            with open(meta_file, 'r') as f:
+                meta = json.load(f)
+                stats["traditions"].add(meta.get("tradition", "Unknown"))
+                stats["semantic_tags"].update(meta.get("tags", []))
+        except Exception as e:
+            continue
     
     # Extract traditions from directory structure
     if os.path.exists("data/texts"):
@@ -97,11 +113,15 @@ def calculate_database_stats():
     
     # Convert sets to counts
     final_stats = {
+        "sacred_texts": stats["total_documents"],
         "total_documents": stats["total_documents"],
+        "analyzed_documents": max(stats["analyzed_documents"], stats["total_chunks"]),
         "total_chunks": stats["total_chunks"],
+        "traditions": len(stats["traditions"]),
         "traditions_count": len(stats["traditions"]),
         "periods_count": len(stats["periods"]),
         "text_types_count": len(stats["text_types"]),
+        "semantic_tags": len(stats["semantic_tags"]),
         "semantic_tags_count": len(stats["semantic_tags"]),
         "ai_phases": stats["ai_phases"],
         "traditions_list": list(stats["traditions"]),
@@ -129,11 +149,24 @@ def get_display_stats():
     stats = calculate_database_stats()
     
     return {
-        "Sacred Texts": f"{stats['total_documents']:,}",
+        "Sacred Texts": f"{stats['sacred_texts']:,}",
+        "Analyzed Documents": f"{stats['analyzed_documents']:,}",
         "Text Chunks": f"{stats['total_chunks']:,}",
-        "Traditions": f"{stats['traditions_count']}",
-        "Semantic Tags": f"{stats['semantic_tags_count']}+",
+        "Traditions": f"{stats['traditions']}",
+        "Semantic Tags": f"{stats['semantic_tags']}+",
         "AI Phases": f"{stats['ai_phases']} Complete"
+    }
+
+def get_homepage_stats():
+    """Get stats in the format specified by user requirements"""
+    stats = calculate_database_stats()
+    
+    return {
+        "sacred_texts": stats['sacred_texts'],
+        "analyzed_documents": stats['analyzed_documents'], 
+        "traditions": stats['traditions'],
+        "semantic_tags": stats['semantic_tags'],
+        "ai_phases": stats['ai_phases']
     }
 
 def print_stats_summary():
