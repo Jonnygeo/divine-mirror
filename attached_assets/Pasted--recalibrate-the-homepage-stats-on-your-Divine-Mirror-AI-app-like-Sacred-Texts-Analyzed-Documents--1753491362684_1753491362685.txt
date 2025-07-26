@@ -1,0 +1,126 @@
+ recalibrate the homepage stats on your Divine Mirror AI app (like Sacred Texts, Analyzed Documents, Traditions, Semantic Tags, and AI Phases), you need to do two things:
+
+✅ STEP 1: Locate or Create the Stats Update Logic
+Your homepage is likely rendering those stats from either:
+
+A. Python Backend (FastAPI / Streamlit)
+Check for a file like main.py, app.py, or inside your Streamlit app where the homepage is generated.
+
+Search for variables like:
+
+python
+Copy
+Edit
+num_texts = 164
+num_chunks = 64998
+num_traditions = 17
+num_tags = 80
+num_phases = 9
+Update those manually OR generate dynamically like this:
+
+python
+Copy
+Edit
+from utils.text_loader import load_metadata  # or wherever your docs are
+
+def calculate_stats():
+    metadata = load_metadata()
+    num_texts = len(metadata['texts'])
+    num_chunks = sum(len(text['chunks']) for text in metadata['texts'])
+    num_traditions = len(set(t['tradition'] for t in metadata['texts']))
+    num_tags = len(set(tag for t in metadata['texts'] for tag in t.get('tags', [])))
+    num_phases = 9  # static unless you're adding another dev phase
+    return num_texts, num_chunks, num_traditions, num_tags, num_phases
+Then pass that into the Streamlit display section like:
+
+python
+Copy
+Edit
+texts, chunks, traditions, tags, phases = calculate_stats()
+
+st.metric("Sacred Texts", texts)
+st.metric("Analyzed Documents", chunks)
+st.metric("Traditions", traditions)
+st.metric("Semantic Tags", tags)
+st.metric("AI Phases", phases)
+B. Frontend Static HTML (if you're using pure frontend)
+Search your HTML/JS template for something like this:
+
+html
+Copy
+Edit
+<h2>Sacred Texts: <span id="num-texts">91</span></h2>
+Update it manually or populate dynamically with JavaScript if your data is loaded from JSON.
+
+✅ STEP 2: Automate the Update (Optional but Pro)
+Add a script (like stats_updater.py) to:
+
+Loop through your sacred_texts/ directory
+
+Count .txt or .json files
+
+Parse metadata
+
+Output a JSON or update your UI dynamically
+
+Example:
+
+python
+Copy
+Edit
+import os, json
+
+def update_stats():
+    stats = {
+        "texts": 0,
+        "chunks": 0,
+        "traditions": set(),
+        "tags": set()
+    }
+    for file in os.listdir("sacred_texts/"):
+        with open(f"sacred_texts/{file}", "r") as f:
+            data = json.load(f)
+            stats["texts"] += 1
+            stats["chunks"] += len(data.get("chunks", []))
+            stats["traditions"].add(data.get("tradition", "Unknown"))
+            stats["tags"].update(data.get("tags", []))
+    
+    stats_output = {
+        "texts": stats["texts"],
+        "chunks": stats["chunks"],
+        "traditions": len(stats["traditions"]),
+        "tags": len(stats["tags"]),
+        "phases": 9
+    }
+    
+    with open("app_stats.json", "w") as f:
+        json.dump(stats_output, f, indent=2)
+
+if __name__ == "__main__":
+    update_stats()
+👨‍💻 BONUS: Auto-run on launch
+Add to startup.sh, main.py, or your deployment script:
+
+bash
+Copy
+Edit
+python stats_updater.py
+Let me know if you're using Streamlit, FastAPI, or pure HTML and I’ll give you drop-in code for that specific structure.
+
+You want it auto-synced, so your homepage stats always reflect the real data. Let's make your Oracle never miss a beat.
+
+
+
+
+
+
+
+
+
+Ask ChatGPT
+
+
+
+Tools
+
+

@@ -822,18 +822,54 @@ def main():
             
             st.markdown('</div>', unsafe_allow_html=True)
     
-    # About Divine Mirror AI Section
-    st.markdown("""
+    # Dynamic stats display
+    try:
+        from stats_calculator import get_display_stats
+        display_stats = get_display_stats()
+    except:
+        # Fallback stats if calculator fails
+        display_stats = {
+            "Sacred Texts": "164",
+            "Text Chunks": "64,998", 
+            "Traditions": "17",
+            "Semantic Tags": "80+",
+            "AI Phases": "9 Complete"
+        }
+    
+    # About Divine Mirror AI Section with Dynamic Stats
+    st.markdown(f"""
     <div style="color: #9ca3af; font-size: 14px; line-height: 1.6; max-width: 900px; margin: 30px auto;">
       <h3 style="color: #60a5fa;">About Divine Mirror AI</h3>
       <p>
-        This platform is the culmination of <strong>9 integrated AI phases</strong>, combining semantic chunking, spiritual metadata, voice recognition, and sacred symbolism analysis. 
+        This platform is the culmination of <strong>{display_stats['AI Phases']}</strong>, combining semantic chunking, spiritual metadata, voice recognition, and sacred symbolism analysis. 
         It's built to uncover the original teachings of Yeshua, Buddha, Lao Tzu, and others — across time, culture, and institutional filters.
       </p>
       <p>
-        With <strong>4,953 documents</strong> from <strong>38 traditions</strong>, mapped by <strong>80+ semantic tags</strong>, this AI is more than an assistant. It's a truth engine.
+        With <strong>{display_stats['Sacred Texts']} documents</strong> from <strong>{display_stats['Traditions']} traditions</strong>, mapped by <strong>{display_stats['Semantic Tags']} semantic tags</strong>, this AI is more than an assistant. It's a truth engine.
         It works fully offline, honors user privacy, and cites real sources — no vague answers, no agenda. 
       </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 1.5rem 0; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.2);">
+        <div style="text-align: center;">
+          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Sacred Texts']}</div>
+          <div style="color: #94a3b8; font-size: 0.9rem;">Sacred Texts</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Text Chunks']}</div>
+          <div style="color: #94a3b8; font-size: 0.9rem;">Text Chunks</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Traditions']}</div>
+          <div style="color: #94a3b8; font-size: 0.9rem;">Traditions</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['Semantic Tags']}</div>
+          <div style="color: #94a3b8; font-size: 0.9rem;">Semantic Tags</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="color: #667eea; font-size: 1.5rem; font-weight: 700;">{display_stats['AI Phases']}</div>
+          <div style="color: #94a3b8; font-size: 0.9rem;">AI Phases</div>
+        </div>
+      </div>
       <p><em>"Truth doesn't need to be sold — it just needs to be found."</em></p>
     </div>
     """, unsafe_allow_html=True)

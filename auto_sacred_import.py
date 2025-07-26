@@ -95,6 +95,14 @@ def ensure_sacred_texts_ready():
         with open("data/metadata/sacred_metadata.json", 'w') as f:
             json.dump(basic_metadata, f, indent=2)
     
+    # Update stats after ensuring texts are ready
+    try:
+        from stats_calculator import save_stats_to_file
+        save_stats_to_file()
+        print("✓ Stats updated")
+    except Exception as e:
+        print(f"⚠️  Stats update failed: {e}")
+    
     return success
 
 if __name__ == "__main__":
