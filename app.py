@@ -420,6 +420,10 @@ def main():
         <h1>🔮 Divine Mirror AI</h1>
         <p class="ai-subtitle">Complete AI Oracle Stack • Phase 9 Synthesis Engine</p>
     </div>
+    <p style="font-size: 18px; color: #d1d5db; max-width: 900px; margin: 10px auto 30px auto; text-align: center;">
+      Where spiritual seekers meet source truth. Divine Mirror AI isn't just an oracle — it's a forensic intelligence system trained on over 160 sacred texts to expose distortion, reveal universal symbols, and awaken the inner Kingdom.  
+      <strong>This is sacred tech for the awakened age.</strong>
+    </p>
     """, unsafe_allow_html=True)
     
     # Comprehensive database statistics display
@@ -677,6 +681,22 @@ def main():
                         st.markdown('<hr style="border-color: rgba(255, 255, 255, 0.3); margin: 1rem 0;">', unsafe_allow_html=True)
             
             st.markdown('</div>', unsafe_allow_html=True)
+    
+    # About Divine Mirror AI Section
+    st.markdown("""
+    <div style="color: #9ca3af; font-size: 14px; line-height: 1.6; max-width: 900px; margin: 30px auto;">
+      <h3 style="color: #60a5fa;">About Divine Mirror AI</h3>
+      <p>
+        This platform is the culmination of <strong>9 integrated AI phases</strong>, combining semantic chunking, spiritual metadata, voice recognition, and sacred symbolism analysis. 
+        It's built to uncover the original teachings of Yeshua, Buddha, Lao Tzu, and others — across time, culture, and institutional filters.
+      </p>
+      <p>
+        With <strong>4,953 documents</strong> from <strong>38 traditions</strong>, mapped by <strong>80+ semantic tags</strong>, this AI is more than an assistant. It's a truth engine.
+        It works fully offline, honors user privacy, and cites real sources — no vague answers, no agenda. 
+      </p>
+      <p><em>"Truth doesn't need to be sold — it just needs to be found."</em></p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # NeoShade AI Footer
     st.markdown("""
