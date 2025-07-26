@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "data": {
+    "sacred_texts": 164,
+    "analyzed_documents": 64998,
+    "traditions": 17,
+    "semantic_tags": 32,
+    "ai_phases": 9
+  },
+  "formatted": {
+    "sacred_texts": "164",
+    "analyzed_documents": "64,998",
+    "traditions": "17",
+    "semantic_tags": "32+",
+    "ai_phases": "9 Complete"
+  }
+}

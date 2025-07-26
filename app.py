@@ -835,23 +835,38 @@ def main():
     
     try:
         if st.session_state.stats_cache is None:
-            from stats_calculator import get_homepage_stats
-            homepage_stats = get_homepage_stats()
-            
-            # Format for display - ensure analyzed_documents shows 64,998 from text chunks
-            display_stats = {
-                "Sacred Texts": f"{homepage_stats['sacred_texts']:,}",
-                "Analyzed Documents": f"{homepage_stats['analyzed_documents']:,}",
-                "Traditions": f"{homepage_stats['traditions']}",
-                "Semantic Tags": f"{homepage_stats['semantic_tags']}+",
-                "AI Phases": f"{homepage_stats['ai_phases']} Complete"
-            }
-            st.session_state.stats_cache = display_stats
+            # Try to fetch from backend API first
+            try:
+                async def fetch_api_stats():
+                    async with httpx.AsyncClient() as client:
+                        response = await client.get(f"{API_BASE_URL}/stats", timeout=10.0)
+                        return response.json()
+                
+                api_stats = asyncio.run(fetch_api_stats())
+                if api_stats and api_stats.get("status") == "success":
+                    display_stats = api_stats["formatted"]
+                    st.session_state.stats_cache = display_stats
+                else:
+                    raise Exception("API stats failed, using local calculation")
+                    
+            except Exception:
+                # Fallback to local stats calculator
+                from stats_calculator import get_homepage_stats
+                homepage_stats = get_homepage_stats()
+                
+                display_stats = {
+                    "Sacred Texts": f"{homepage_stats['sacred_texts']:,}",
+                    "Analyzed Documents": f"{homepage_stats['analyzed_documents']:,}",
+                    "Traditions": f"{homepage_stats['traditions']}",
+                    "Semantic Tags": f"{homepage_stats['semantic_tags']}+",
+                    "AI Phases": f"{homepage_stats['ai_phases']} Complete"
+                }
+                st.session_state.stats_cache = display_stats
         else:
             display_stats = st.session_state.stats_cache
             
     except Exception as e:
-        # Fallback stats if calculator fails
+        # Final fallback stats if everything fails
         display_stats = {
             "Sacred Texts": "164",
             "Analyzed Documents": "64,998",

@@ -233,6 +233,47 @@ async def test_smart_model():
             "prompt": test_prompt
         }
 
+@app.get("/stats")
+async def get_database_stats():
+    """Get real-time database statistics"""
+    try:
+        import sys
+        import os
+        sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+        from stats_calculator import get_homepage_stats
+        
+        stats = get_homepage_stats()
+        return {
+            "status": "success",
+            "data": {
+                "sacred_texts": stats["sacred_texts"],
+                "analyzed_documents": stats["analyzed_documents"],
+                "traditions": stats["traditions"],
+                "semantic_tags": stats["semantic_tags"],
+                "ai_phases": stats["ai_phases"]
+            },
+            "formatted": {
+                "sacred_texts": f"{stats['sacred_texts']:,}",
+                "analyzed_documents": f"{stats['analyzed_documents']:,}",
+                "traditions": str(stats["traditions"]),
+                "semantic_tags": f"{stats['semantic_tags']}+",
+                "ai_phases": f"{stats['ai_phases']} Complete"
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error calculating stats: {str(e)}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "fallback_data": {
+                "sacred_texts": 164,
+                "analyzed_documents": 64998,
+                "traditions": 17,
+                "semantic_tags": 32,
+                "ai_phases": 9
+            }
+        }
+
 def start():
     """Run the API server with Uvicorn"""
     uvicorn.run("backend.api:app", host="0.0.0.0", port=8000, reload=True)
