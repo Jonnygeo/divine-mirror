@@ -14,6 +14,39 @@ import time
 # URL of the sacred text database archive
 ZIP_URL = "https://neo-shade.com/assets/divine_mirror_full_sacred_texts.zip"
 
+def download_with_wget():
+    """Alternative download using wget command"""
+    import subprocess
+    
+    print("📥 Attempting download with wget...")
+    try:
+        # Create data/texts directory
+        os.makedirs("data/texts", exist_ok=True)
+        
+        # Download with wget
+        subprocess.run([
+            "wget", 
+            ZIP_URL, 
+            "-O", "sacred_texts.zip"
+        ], check=True)
+        
+        # Extract
+        subprocess.run([
+            "unzip", 
+            "sacred_texts.zip", 
+            "-d", "data/texts"
+        ], check=True)
+        
+        # Cleanup
+        os.remove("sacred_texts.zip")
+        
+        print("✓ Downloaded and extracted with wget")
+        return True
+        
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        print(f"❌ wget method failed: {e}")
+        return False
+
 def create_directories():
     """Create necessary directory structure"""
     directories = [
@@ -137,12 +170,20 @@ def main():
     # Create directory structure
     create_directories()
     
-    # Try to fetch from URL
+    # Try multiple download methods
+    success = False
+    
+    # Method 1: Direct Python requests
     success = fetch_and_extract_zip(ZIP_URL)
     
-    # If download fails, create fallback structure
+    # Method 2: Try wget if available
     if not success:
-        print("📝 Download failed, creating local structure...")
+        print("🔄 Trying wget method...")
+        success = download_with_wget()
+    
+    # Method 3: Create fallback structure
+    if not success:
+        print("📝 All downloads failed, creating local structure...")
         create_fallback_structure()
     
     # Verify installation

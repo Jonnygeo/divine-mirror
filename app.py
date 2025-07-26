@@ -6,6 +6,13 @@ import json
 from typing import List, Optional, Dict, Any
 from divine_emotional_engine import EmotionalToneEngine
 
+# Ensure sacred texts are available on startup
+try:
+    from auto_sacred_import import ensure_sacred_texts_ready
+    ensure_sacred_texts_ready()
+except ImportError:
+    pass  # Continue without auto-import if not available
+
 # Configure page with modern settings
 st.set_page_config(
     page_title="Divine Mirror AI",
