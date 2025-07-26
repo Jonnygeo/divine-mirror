@@ -310,7 +310,22 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.05) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 12px !important;
-        color: #e2e8f0 !important;
+        color: white !important;
+    }
+    
+    /* Expander header text - make all expander text white */
+    .streamlit-expanderHeader p {
+        color: white !important;
+    }
+    
+    /* Streamlit expander summary text */
+    details[data-testid="stExpander"] summary {
+        color: white !important;
+    }
+    
+    /* All expander labels and text */
+    .streamlit-expanderHeader [data-testid="stMarkdownContainer"] p {
+        color: white !important;
     }
     
     .streamlit-expanderContent {
