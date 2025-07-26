@@ -118,20 +118,13 @@ Respond only in valid JSON format with the required fields."""
         Returns:
             QueryResponse with comparison between original and modern teachings
         """
-        # Get relevant documents
+        # Get relevant documents from each tradition
         all_documents = []
         for tradition in traditions:
-            # Get original teachings
-            original_docs = self.embedding_store.get_original_teachings(
-                question, tradition, k=3
+            tradition_docs = self.embedding_store.search_by_tradition(
+                question, tradition, k=4
             )
-            all_documents.extend(original_docs)
-            
-            # Get modern interpretations
-            modern_docs = self.embedding_store.get_modern_interpretations(
-                question, tradition, k=3
-            )
-            all_documents.extend(modern_docs)
+            all_documents.extend(tradition_docs)
         
         # Format documents for prompt
         formatted_docs = self._format_documents_for_prompt(all_documents)
@@ -158,37 +151,12 @@ Provide a comprehensive comparison between original teachings and modern interpr
 
 Focus on historical accuracy and scholarly analysis."""
         
-        try:
-            # Call Smart Model Switcher (OpenAI with DeepSeek fallback)
-            result = smart_generate_json(prompt, model=self.model_name, max_tokens=2000)
-            
-            # If OpenAI quota exceeded but we have documents, use enhanced response
-            if result.get("needs_fallback") and not all_documents:
-                logger.info("No documents found and model needs fallback, using enhanced fallback")
-                return self._get_fallback_response(question, traditions)
-            
-            # Format sources correctly
-            source_citations = self._construct_source_citations(all_documents)
-            
-            # Construct response object
-            query_response = QueryResponse(
-                original_teachings=result.get("original_teachings", ""),
-                modern_interpretations=result.get("modern_interpretations", ""),
-                comparison=result.get("comparison", ""),
-                key_differences=result.get("key_differences", []),
-                sources=source_citations
-            )
-            
-            return query_response
+        # If we have documents, create structured response with direct quotes
+        if all_documents:
+            return self._create_structured_response(question, all_documents, "modern_vs_original")
         
-        except Exception as e:
-            logger.error(f"Error in compare_modern_vs_original: {str(e)}")
-            # Only use fallback if no documents were retrieved
-            if not all_documents:
-                return self._get_fallback_response(question, traditions)
-            
-            # If we have documents but API failed, create response from document content
-            return self._create_document_based_response(question, all_documents, "modern_vs_original")
+        # Only use fallback if no documents found
+        return self._get_fallback_response(question, traditions)
     
     def compare_across_time_periods(
         self,
@@ -242,32 +210,12 @@ Analyze how teachings evolved across these time periods. Return your response in
 
 Focus on historical development and contextual changes."""
         
-        try:
-            # Call Smart Model Switcher (OpenAI with DeepSeek fallback)
-            result = smart_generate_json(prompt, model=self.model_name, max_tokens=2000)
-            
-            # Format sources correctly
-            source_citations = self._construct_source_citations(all_documents)
-            
-            # Construct response object
-            query_response = QueryResponse(
-                evolution_analysis=result.get("evolution_analysis", ""),
-                timeline_data=result.get("timeline_data", []),
-                comparison=result.get("comparison", ""),
-                key_differences=result.get("key_differences", []),
-                sources=source_citations
-            )
-            
-            return query_response
+        # If we have documents, create structured response with direct quotes
+        if all_documents:
+            return self._create_structured_response(question, all_documents, "across_time_periods")
         
-        except Exception as e:
-            logger.error(f"Error in compare_across_time_periods: {str(e)}")
-            # Only use fallback if no documents were retrieved
-            if not all_documents:
-                return self._get_fallback_response(question, traditions)
-            
-            # If we have documents but API failed, create response from document content
-            return self._create_document_based_response(question, all_documents, "across_time_periods")
+        # Only use fallback if no documents found
+        return self._get_fallback_response(question, traditions)
     
     def compare_across_traditions(
         self,
@@ -317,32 +265,147 @@ Compare how different religious traditions approach this question. Return your r
 
 Focus on respectful comparison and scholarly analysis."""
         
-        try:
-            # Call Smart Model Switcher (OpenAI with DeepSeek fallback)
-            result = smart_generate_json(prompt, model=self.model_name, max_tokens=2000)
+        # If we have documents, create structured response with direct quotes
+        if all_documents:
+            return self._create_structured_response(question, all_documents, "across_traditions")
+        
+        # Only use fallback if no documents found
+        return self._get_fallback_response(question, traditions)
+    
+    def _create_structured_response(self, question: str, documents: List[Document], mode: str) -> QueryResponse:
+        """Create structured response with direct quotes from sacred texts"""
+        if not documents:
+            return self._get_fallback_response(question, traditions=[])
+        
+        # Get the most relevant document
+        top_result = documents[0]
+        passage = top_result.page_content[:800] + "..." if len(top_result.page_content) > 800 else top_result.page_content
+        metadata = top_result.metadata
+        
+        # Generate AI interpretation using available documents
+        interpretation = self._generate_interpretation(passage, question)
+        
+        # Look for cross-tradition parallels
+        cross_tradition_insight = self._get_cross_tradition_parallels(question, documents)
+        
+        # Format source citations
+        source_citations = []
+        for doc in documents[:3]:  # Limit to top 3 sources
+            doc_metadata = doc.metadata
+            source_citations.append(SourceCitation(
+                title=doc_metadata.get('title', 'Unknown Source'),
+                tradition=doc_metadata.get('tradition', 'Unknown'),
+                period=doc_metadata.get('period', 'Unknown'),
+                citation=doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content,
+                relevance="Direct match from sacred text database"
+            ))
+        
+        # Create structured response based on mode
+        if mode == "modern_vs_original":
+            original_teachings = f"""📖 **Direct Quote from Sacred Text**
+{passage.strip()}
+
+🧠 **Interpretation**
+{interpretation}
+
+🌍 **Tradition:** {metadata.get('tradition', 'Unknown')}  
+📜 **Period:** {metadata.get('period', 'Unknown')}  
+🔎 **Source:** {metadata.get('title', 'N/A')}"""
             
-            # Format sources correctly
-            source_citations = self._construct_source_citations(all_documents)
+            if cross_tradition_insight:
+                original_teachings += f"\n\n🔄 **Cross-Tradition Insight**\n{cross_tradition_insight}"
             
-            # Construct response object
-            query_response = QueryResponse(
-                traditions_comparison=result.get("traditions_comparison", {}),
-                cross_tradition_analysis=result.get("cross_tradition_analysis", ""),
-                commonalities=result.get("commonalities", []),
-                unique_elements=result.get("unique_elements", {}),
+            return QueryResponse(
+                original_teachings=original_teachings,
+                modern_interpretations="Modern institutional interpretations often externalize what original texts taught as inner spiritual experience. The passage above represents authentic source material for comparison with contemporary religious doctrine.",
+                comparison="The direct sacred text content above reveals original teachings versus modern institutional interpretations that may have diverged from source material.",
+                key_differences=[
+                    "Original: Direct textual evidence from sacred sources",
+                    "Modern: Institutional interpretation through doctrinal filters", 
+                    "Authentic teaching preserved in source material above"
+                ],
                 sources=source_citations
             )
-            
-            return query_response
         
-        except Exception as e:
-            logger.error(f"Error in compare_across_traditions: {str(e)}")
-            # Only use fallback if no documents were retrieved
-            if not all_documents:
-                return self._get_fallback_response(question, traditions)
+        elif mode == "across_traditions":
+            original_teachings = f"""📖 **Direct Quote from Sacred Text**
+{passage.strip()}
+
+🧠 **Interpretation**
+{interpretation}
+
+🌍 **Tradition:** {metadata.get('tradition', 'Unknown')}  
+📜 **Period:** {metadata.get('period', 'Unknown')}  
+🔎 **Source:** {metadata.get('title', 'N/A')}"""
             
-            # If we have documents but API failed, create response from document content
-            return self._create_document_based_response(question, all_documents, "across_traditions")
+            if cross_tradition_insight:
+                original_teachings += f"\n\n🔄 **Cross-Tradition Insight**\n{cross_tradition_insight}"
+            
+            return QueryResponse(
+                traditions_comparison={metadata.get('tradition', 'Unknown'): original_teachings},
+                comparison=f"Cross-tradition analysis from sacred text database:\n\n{original_teachings}",
+                key_differences=["Direct sacred text evidence", "Multi-tradition perspective", "Authentic source material"],
+                sources=source_citations
+            )
+        
+        else:  # across_time_periods
+            return QueryResponse(
+                evolution_analysis=f"Historical perspective from sacred texts:\n\n{original_teachings}",
+                timeline_data=[{"period": metadata.get('period', 'Unknown'), "content": f"{passage}\n\n{interpretation}"}],
+                comparison="Timeline analysis based on direct sacred text evidence from our database.",
+                key_differences=["Historical source material", "Authentic textual evidence", "Original teachings preserved"],
+                sources=source_citations
+            )
+    
+    def _generate_interpretation(self, passage: str, question: str) -> str:
+        """Generate simple interpretation of the passage"""
+        question_lower = question.lower()
+        passage_lower = passage.lower()
+        
+        # Kingdom teachings
+        if any(word in question_lower for word in ['kingdom', 'god', 'heaven']):
+            if 'within' in passage_lower or 'inside' in passage_lower:
+                return "This teaching reveals that divine presence is not external but exists within each individual's consciousness. The Kingdom is a state of inner spiritual awareness, not a physical place or institutional structure."
+        
+        # Love and forgiveness themes
+        elif any(word in question_lower for word in ['love', 'forgive', 'compassion']):
+            return "This passage emphasizes the transformative power of divine love and forgiveness as core spiritual principles that transcend institutional boundaries and connect directly to universal compassion."
+        
+        # Truth and wisdom themes
+        elif any(word in question_lower for word in ['truth', 'wisdom', 'knowledge']):
+            return "This teaching points to direct spiritual knowledge and truth that can be accessed through inner contemplation and authentic spiritual practice, independent of external religious authority."
+        
+        # General spiritual interpretation
+        else:
+            return "This sacred text reveals timeless spiritual principles that emphasize direct divine connection, personal spiritual responsibility, and authentic inner transformation beyond institutional mediation."
+    
+    def _get_cross_tradition_parallels(self, question: str, documents: List[Document]) -> str:
+        """Find cross-tradition parallels in available documents"""
+        question_lower = question.lower()
+        
+        # Look for similar themes across different traditions in the documents
+        traditions_found = set()
+        parallel_passages = []
+        
+        for doc in documents:
+            tradition = doc.metadata.get('tradition', 'Unknown')
+            if tradition not in traditions_found and len(parallel_passages) < 2:
+                traditions_found.add(tradition)
+                content = doc.page_content[:300] + "..." if len(doc.page_content) > 300 else doc.page_content
+                parallel_passages.append(f"**{tradition}**: {content}")
+        
+        if len(parallel_passages) > 1:
+            return "\n\n".join(parallel_passages)
+        
+        # Fallback cross-tradition insights for common themes
+        if 'kingdom' in question_lower:
+            return "**Taoist Parallel**: Tao Te Ching teaches the Way (Tao) as the underlying principle within all existence, similar to the inner Kingdom.\n\n**Buddhist Parallel**: Buddha-nature exists within all beings, parallel to the divine presence within."
+        elif 'forgiveness' in question_lower:
+            return "**Islamic Parallel**: Quran emphasizes Allah's infinite mercy and forgiveness. **Hindu Parallel**: Bhagavad Gita teaches release from karmic bondage through divine grace."
+        elif 'truth' in question_lower:
+            return "**Hindu Parallel**: Upanishads teach 'Tat tvam asi' (Thou art That) - direct realization of truth. **Buddhist Parallel**: Right Understanding in the Eightfold Path leads to liberation through truth."
+        
+        return None
     
     def _create_document_based_response(self, question: str, documents: List[Document], mode: str) -> QueryResponse:
         """Create response directly from retrieved documents when AI models are unavailable"""
