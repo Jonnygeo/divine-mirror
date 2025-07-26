@@ -253,11 +253,11 @@ async def get_database_stats():
                 "ai_phases": stats["ai_phases"]
             },
             "formatted": {
-                "sacred_texts": f"{stats['sacred_texts']:,}",
-                "analyzed_documents": f"{stats['analyzed_documents']:,}",
-                "traditions": str(stats["traditions"]),
-                "semantic_tags": f"{stats['semantic_tags']}+",
-                "ai_phases": f"{stats['ai_phases']} Complete"
+                "Sacred Texts": f"{stats['sacred_texts']:,}",
+                "Analyzed Documents": f"{stats['analyzed_documents']:,}",
+                "Traditions": str(stats["traditions"]),
+                "Semantic Tags": f"{stats['semantic_tags']}+",
+                "AI Phases": f"{stats['ai_phases']} Complete"
             }
         }
     except Exception as e:
