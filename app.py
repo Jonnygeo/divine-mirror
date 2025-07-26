@@ -737,18 +737,81 @@ def main():
                         st.markdown(f"**{period_data.get('period', 'Unknown Period')}:**")
                         st.markdown(f'<div class="modern-text">{period_data.get("summary", "No summary available")}</div>', unsafe_allow_html=True)
             
-            # Sources section
+            # Enhanced Sources section with larger text and view button
             if result.get("sources"):
-                st.markdown("### 📚 Source Citations")
-                with st.expander("View Source Documentation"):
-                    for source in result["sources"]:
-                        st.markdown(f'<p style="color: white; font-weight: bold; margin-bottom: 0.5rem;">{source.get("title", "Unknown Title")}</p>', unsafe_allow_html=True)
-                        st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Tradition: {source.get("tradition", "Unknown")}</p>', unsafe_allow_html=True)
-                        st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Period: {source.get("period", "Unknown")}</p>', unsafe_allow_html=True)
-                        st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Citation: {source.get("citation", "No citation")}</p>', unsafe_allow_html=True)
-                        if source.get('relevance'):
-                            st.markdown(f'<p style="color: white; margin: 0.2rem 0;">• Relevance: {source["relevance"]}</p>', unsafe_allow_html=True)
-                        st.markdown('<hr style="border-color: rgba(255, 255, 255, 0.3); margin: 1rem 0;">', unsafe_allow_html=True)
+                st.markdown('<div class="sources-section">', unsafe_allow_html=True)
+                
+                # Large, prominent header with button
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    st.markdown("""
+                    <div style="margin: 2rem 0;">
+                        <h2 style="color: #667eea; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem;">
+                            📚 Source Citations
+                        </h2>
+                        <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin: 0;">
+                            View Source Documentation from Sacred Text Database
+                        </p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with col2:
+                    st.markdown('<div style="margin-top: 2rem;">', unsafe_allow_html=True)
+                    if st.button("📖 View All Sources", key="view_sources_btn", help="Expand all source documentation"):
+                        st.session_state.expand_all_sources = not st.session_state.get('expand_all_sources', False)
+                    st.markdown('</div>', unsafe_allow_html=True)
+                
+                # Source documents with enhanced styling
+                expand_all = st.session_state.get('expand_all_sources', False)
+                
+                for i, source in enumerate(result["sources"], 1):
+                    # Enhanced expander with larger text
+                    st.markdown(f"""
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-left: 4px solid #667eea; border-radius: 8px;">
+                        <h4 style="color: white; font-size: 1.3rem; margin-bottom: 0.5rem;">
+                            📖 Source {i}: {source.get('title', 'Unknown Source')}
+                        </h4>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    with st.expander(f"View Details & Text Excerpt", expanded=expand_all):
+                        # Source metadata in larger, more readable format
+                        st.markdown("""
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                            <div>
+                                <h5 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem;">Tradition</h5>
+                                <p style="color: white; font-size: 1rem; margin: 0;">{}</p>
+                            </div>
+                            <div>
+                                <h5 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem;">Period</h5>
+                                <p style="color: white; font-size: 1rem; margin: 0;">{}</p>
+                            </div>
+                            <div>
+                                <h5 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem;">Text Type</h5>
+                                <p style="color: white; font-size: 1rem; margin: 0;">{}</p>
+                            </div>
+                            <div>
+                                <h5 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem;">Relevance</h5>
+                                <p style="color: white; font-size: 1rem; margin: 0;">{}</p>
+                            </div>
+                        </div>
+                        """.format(
+                            source.get('tradition', 'N/A'),
+                            source.get('period', 'N/A'), 
+                            source.get('text_type', 'N/A'),
+                            source.get('relevance', 'N/A')
+                        ), unsafe_allow_html=True)
+                        
+                        if source.get('citation'):
+                            st.markdown("""
+                            <div style="margin: 1.5rem 0;">
+                                <h5 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem;">📜 Sacred Text Excerpt</h5>
+                                <div style="background: rgba(0, 0, 0, 0.3); border-left: 4px solid #667eea; padding: 1.5rem; border-radius: 8px; font-family: 'Georgia', serif;">
+                                    <p style="color: #e2e8f0; font-size: 1.05rem; line-height: 1.6; margin: 0; white-space: pre-wrap;">{}</p>
+                                </div>
+                            </div>
+                            """.format(source["citation"]), unsafe_allow_html=True)
+                
+                st.markdown('</div>', unsafe_allow_html=True)
             
             st.markdown('</div>', unsafe_allow_html=True)
     
