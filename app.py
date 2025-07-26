@@ -414,21 +414,21 @@ async def get_time_periods():
             return {"time_periods": ["Ancient (3000-500 BCE)", "Classical (500 BCE-500 CE)", "Contemporary (1800-Present)"]}
 
 def main():
-    # Modern header with AI branding
+    # Modern header with AI branding and comprehensive stats
     st.markdown("""
     <div class="ai-header">
         <h1>🔮 Divine Mirror AI</h1>
-        <p class="ai-subtitle">Unveiling Spiritual Truth Through Ancient Wisdom</p>
+        <p class="ai-subtitle">Complete AI Oracle Stack • Phase 9 Synthesis Engine</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Modern metrics display
-    col1, col2, col3, col4 = st.columns(4)
+    # Comprehensive database statistics display
+    col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">91</div>
+            <div class="metric-value">164</div>
             <div class="metric-label">Sacred Texts</div>
         </div>
         """, unsafe_allow_html=True)
@@ -436,15 +436,15 @@ def main():
     with col2:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">76</div>
-            <div class="metric-label">Bible Books</div>
+            <div class="metric-value">4,953</div>
+            <div class="metric-label">Analyzed Documents</div>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">7</div>
+            <div class="metric-value">38</div>
             <div class="metric-label">Traditions</div>
         </div>
         """, unsafe_allow_html=True)
@@ -452,10 +452,44 @@ def main():
     with col4:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">∞</div>
-            <div class="metric-label">Truth Revealed</div>
+            <div class="metric-value">80</div>
+            <div class="metric-label">Semantic Tags</div>
         </div>
         """, unsafe_allow_html=True)
+    
+    with col5:
+        st.markdown("""
+        <div class="metric-card">
+            <div class="metric-value">9</div>
+            <div class="metric-label">AI Phases</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # System capabilities overview
+    st.markdown("""
+    <div class="glass-container">
+        <h3 style="color: #667eea; margin-bottom: 1rem;">🚀 Advanced AI Oracle Capabilities</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+            <div class="status-indicator status-success">
+                🔬 Forensic Search: 16 symbols, 10 spiritual laws, 22 themes
+            </div>
+            <div class="status-indicator status-success">
+                🎭 Emotional Intelligence: 8 emotions, 6 adaptive tones
+            </div>
+            <div class="status-indicator status-success">
+                🔮 Dynamic Synthesis: 5 universal principles, cross-tradition unity
+            </div>
+            <div class="status-indicator status-success">
+                🗣️ Voice Interface: Multi-language, speech recognition
+            </div>
+        </div>
+        <div style="color: #94a3b8; font-size: 0.9rem;">
+            <strong>Universal Symbols Detected:</strong> Dove (2,639), Tree (2,785), Water (3,049), Light (2,441)<br>
+            <strong>Top Spiritual Laws:</strong> Law of Forgiveness (1,351), Law of Sacrifice (1,435)<br>
+            <strong>Cross-Tradition Themes:</strong> Divine Nature (13 traditions), Morality/Ethics (8 traditions)
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Main interface in glassmorphism container
     st.markdown('<div class="glass-container">', unsafe_allow_html=True)
