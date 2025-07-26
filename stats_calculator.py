@@ -55,6 +55,10 @@ def calculate_database_stats():
     meta_files = glob.glob("data/**/*.meta.json", recursive=True)
     stats["analyzed_documents"] = len(chunk_files) + len(meta_files)
     
+    # If we have text chunks from index, use that as analyzed documents count
+    if stats["total_chunks"] > 0:
+        stats["analyzed_documents"] = max(stats["analyzed_documents"], stats["total_chunks"])
+    
     # Parse metadata files for additional stats
     for meta_file in meta_files:
         try:

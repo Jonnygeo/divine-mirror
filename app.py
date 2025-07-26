@@ -838,7 +838,7 @@ def main():
             from stats_calculator import get_homepage_stats
             homepage_stats = get_homepage_stats()
             
-            # Format for display
+            # Format for display - ensure analyzed_documents shows 64,998 from text chunks
             display_stats = {
                 "Sacred Texts": f"{homepage_stats['sacred_texts']:,}",
                 "Analyzed Documents": f"{homepage_stats['analyzed_documents']:,}",
