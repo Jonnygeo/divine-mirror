@@ -1,0 +1,8 @@
+{
+  "setup_complete": true,
+  "setup_date": "2025-07-26T00:48:37.121380",
+  "total_chunks": 64998,
+  "total_traditions": 17,
+  "index_file": "data/indexes/text_index.json",
+  "version": "1.0.0"
+}

@@ -1,0 +1,29 @@
+{
+  "total_documents": 164,
+  "total_chunks": 33281,
+  "traditions": [
+    "Christianity",
+    "Buddhism",
+    "Hinduism",
+    "Islam",
+    "Judaism",
+    "Taoism",
+    "Gnosticism",
+    "Hermeticism",
+    "Zoroastrianism",
+    "Indigenous"
+  ],
+  "semantic_tags": [
+    "divine_nature",
+    "morality_ethics",
+    "fear_based_manipulation",
+    "kingdom_within",
+    "love_compassion",
+    "truth_wisdom",
+    "spiritual_law",
+    "cross_tradition",
+    "original_teaching"
+  ],
+  "last_updated": "2025-07-26 00:48:30",
+  "source": "Divine Mirror AI Sacred Text Database"
+}

@@ -1,9 +1,12 @@
 import os
 import logging
+import sys
+sys.path.append('/home/runner/workspace')
 from typing import Dict, List, Optional, Any
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.schema import Document
+from offline_search_engine import OfflineSearchEngine, SearchResult
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -37,6 +40,9 @@ class EmbeddingStore:
         
         # Initialize ChromaDB
         self._initialize_chroma()
+        
+        # Initialize offline search engine as fallback
+        self.offline_engine = OfflineSearchEngine()
     
     def _initialize_chroma(self):
         """Initialize ChromaDB vector store"""

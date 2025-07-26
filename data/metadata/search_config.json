@@ -1,0 +1,36 @@
+{
+  "search_methods": [
+    "keyword",
+    "semantic",
+    "cross_tradition"
+  ],
+  "supported_languages": [
+    "english",
+    "hebrew",
+    "greek",
+    "arabic",
+    "sanskrit"
+  ],
+  "search_fields": [
+    "text",
+    "title",
+    "tradition",
+    "period",
+    "keywords"
+  ],
+  "max_results": 10,
+  "chunk_overlap": 50,
+  "min_chunk_size": 50,
+  "spiritual_themes": [
+    "divine_nature",
+    "kingdom_within",
+    "love_compassion",
+    "truth_wisdom",
+    "forgiveness",
+    "salvation",
+    "enlightenment",
+    "prayer_meditation",
+    "spiritual_law",
+    "cross_tradition"
+  ]
+}

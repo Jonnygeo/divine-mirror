@@ -1,0 +1,177 @@
+{
+  "Christianity": {
+    "file_count": 114,
+    "periods": [
+      "Classical",
+      "Contemporary",
+      "Ancient",
+      "Analysis",
+      "Project",
+      "Biblical",
+      "Non-Canonical",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Teachings of Jesus/Yeshua, Biblical texts, and Christian theology"
+  },
+  "Buddhism": {
+    "file_count": 6,
+    "periods": [
+      "Classical",
+      "Contemporary",
+      "Canonical",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Buddha's teachings, sutras, and Buddhist philosophy"
+  },
+  "Taoism": {
+    "file_count": 6,
+    "periods": [
+      "Classical",
+      "Contemporary",
+      "Philosophical",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Tao Te Ching, I Ching, and Taoist philosophy"
+  },
+  "Islam": {
+    "file_count": 7,
+    "periods": [
+      "Classical",
+      "Contemporary",
+      "Quranic",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Quran, Hadith, and Islamic teachings"
+  },
+  "Gnosticism": {
+    "file_count": 1,
+    "periods": [
+      "Classical",
+      "Ancient",
+      "Early",
+      "Modern"
+    ],
+    "description": "Gnostic gospels and early Christian mysticism"
+  },
+  "Hermeticism": {
+    "file_count": 1,
+    "periods": [
+      "Classical",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Hermetic texts and ancient wisdom traditions"
+  },
+  "Judaism": {
+    "file_count": 5,
+    "periods": [
+      "Classical",
+      "Contemporary",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Torah, Talmud, and Jewish sacred texts"
+  },
+  "Hinduism": {
+    "file_count": 5,
+    "periods": [
+      "Classical",
+      "Contemporary",
+      "Scriptural",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Vedas, Upanishads, Bhagavad Gita, and Hindu scriptures"
+  },
+  "Zoroastrianism": {
+    "file_count": 4,
+    "periods": [
+      "Scriptural",
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Avesta and Zoroastrian teachings"
+  },
+  "Imported": {
+    "file_count": 8,
+    "periods": [
+      "Downloads"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  },
+  "Jainism": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  },
+  "Sikhism": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  },
+  "Confucianism": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  },
+  "Shinto": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  },
+  "Indigenous": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern",
+      "Traditional"
+    ],
+    "description": "Native wisdom traditions and spiritual teachings"
+  },
+  "Bahai": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  },
+  "Other": {
+    "file_count": 1,
+    "periods": [
+      "Ancient",
+      "Medieval",
+      "Modern"
+    ],
+    "description": "Sacred texts and spiritual teachings"
+  }
+}
