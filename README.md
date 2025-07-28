@@ -169,6 +169,14 @@ Ready for YouTube series "Unveiling Yeshua: The Truth Behind the Bible":
 **Local**: Full local development environment
 
 ---
+## 📁 Git Hygiene
+
+See full `.gitignore` documentation here: [Gitignore Info](./gitignore.md)
+
+Why it matters:
+- Keeps sacred text files clean and safe
+- Blocks massive JSON and `.env` secrets
+- Ensures smooth deployment without bloat
 
 **Divine Mirror AI: Revealing spiritual truth through authentic ancient wisdom** ✨
 
