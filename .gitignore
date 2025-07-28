@@ -1,0 +1,33 @@
+# System & IDE junk
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+*.swp
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+*.venv
+env/
+venv/
+build/
+dist/
+
+# Replit & Editor configs
+.local/
+.replit/
+.vscode/
+*.bin
+*.lock
+
+# Large files or sensitive JSONs
+divine_*.json
+data/indexes/text_index.json
+
+# Git tracking metadata
+.githistory
+.gitattributes
